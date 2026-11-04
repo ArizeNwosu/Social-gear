@@ -39,6 +39,14 @@
 .wt-tag-draft{background:#fdf4dc;color:#8a6d12}
 .wt-tag-sent{background:#e4edcf;color:#244d3d}
 .wt-agent-status{font-size:11px;color:#526747;text-align:center;padding:8px;background:#f0f3e8;border-radius:7px;margin-top:4px}
+/* Audit rows */
+.wt-audit-row{display:flex;align-items:center;gap:10px}
+.wt-audit-icon{font-size:16px;flex-shrink:0}
+.wt-audit-check{font-size:13px;font-weight:700;color:#244d3d;flex-shrink:0;width:16px;text-align:center}
+.wt-audit-name{font-size:12px;color:#526747;flex:1}
+.wt-audit-tag{font-size:9px;font-weight:700;padding:3px 8px;border-radius:5px;flex-shrink:0}
+.wt-audit-mapped{background:#e4edcf;color:#244d3d}
+.wt-audit-review{background:#fdf4dc;color:#8a6d12}
 /* Controls */
 .wt-controls{padding:14px 36px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .wt-progress{flex:1;height:3px;background:#dce1d4;border-radius:2px;overflow:hidden}
