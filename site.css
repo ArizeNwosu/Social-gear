@@ -10,6 +10,7 @@
 [data-reveal].reveal-scale{transform:scale(.92)}
 [data-reveal].reveal-left{transform:translateX(-40px)}
 [data-reveal].reveal-right{transform:translateX(40px)}
+@media(max-width:800px){[data-reveal].reveal-left{transform:translateX(-20px)}[data-reveal].reveal-right{transform:translateX(20px)}}
 /* --- Mockup illustrations --- */
 .mockup{background:#fffefa;border-radius:16px;box-shadow:0 12px 40px #244d3d0d;padding:24px;position:relative;overflow:hidden;min-height:280px}
 .mockup-chrome{display:flex;gap:6px;margin-bottom:18px}
