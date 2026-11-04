@@ -1,0 +1,99 @@
+/* Homepage: stacked sections with a two-column desktop hero. */
+.homepage .promise,
+.homepage .promise-illustrated,
+.homepage .dark-intro,
+.homepage .story,
+.homepage .final-cta,
+.homepage .function-grid,
+.homepage .map-pricing {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.homepage .home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .85fr);
+  align-items: center;
+  max-width: 1160px;
+  gap: clamp(28px, 5vw, 64px);
+  padding: 64px 0 72px;
+}
+.homepage .home-hero .page-heading {
+  padding: 0;
+  max-width: 820px;
+}
+.homepage .hero-wt-wrapper {
+  width: min(100%, 520px);
+  max-width: 520px;
+  justify-self: end;
+  align-items: stretch;
+  margin: 0;
+}
+.homepage .promise,
+.homepage .reference-sections,
+.homepage .dark-band > .shell {
+  max-width: 960px;
+}
+.homepage .promise,
+.homepage .dark-intro,
+.homepage .story {
+  gap: 32px;
+  align-items: start;
+}
+.homepage .promise > div,
+.homepage .dark-intro > div,
+.homepage .story > div {
+  min-width: 0;
+  width: 100%;
+}
+.homepage .promise > div:not(.mockup),
+.homepage .dark-intro > div:not(.mockup),
+.homepage .story > div:not(.scene) {
+  max-width: 720px;
+}
+.homepage .promise p,
+.homepage .promise-illustrated > div > p,
+.homepage .story p,
+.homepage .story h3 {
+  max-width: 680px;
+}
+.homepage .promise > .mockup,
+.homepage .dark-intro > .mockup,
+.homepage .story > .scene {
+  max-width: 760px;
+}
+/* The trust illustration precedes its copy in the original markup. */
+.homepage .promise-illustrated > .mockup:first-child { order: 2; }
+.homepage .promise a { grid-column: auto; }
+.homepage .function-grid,
+.homepage .map-pricing { gap: 16px; }
+.homepage .map-pricing { max-width: 760px; }
+.homepage .map-pricing strong { min-height: 0; }
+.homepage .map-pricing a { align-self: start; min-width: 200px; }
+.homepage .final-cta {
+  max-width: 960px;
+  gap: 24px;
+}
+.homepage .final-cta > .eyebrow,
+.homepage .final-cta > h2,
+.homepage .final-cta > .button,
+.homepage .final-cta > .mockup {
+  grid-column: auto;
+  grid-row: auto;
+}
+.homepage .final-cta > h2 { margin: 0; }
+.homepage .final-cta > .mockup {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 !important;
+  transform: none;
+}
+@media (max-width: 800px) {
+  .homepage .home-hero { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 44px 0; }
+  .homepage .home-hero .page-heading { padding: 0; }
+  .homepage .hero-wt-wrapper { max-width: 100%; justify-self: center; }
+  .homepage .promise,
+  .homepage .dark-intro,
+  .homepage .story { gap: 24px; }
+  .homepage .final-cta { padding: 28px; gap: 20px; }
+  .homepage .map-pricing a { align-self: stretch; min-width: 0; }
+}
