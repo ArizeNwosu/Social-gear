@@ -85,6 +85,47 @@
 .ms-cta-logo{font:700 22px Manrope;letter-spacing:-.5px;margin-top:20px;color:#203b30}
 .ms-cta-logo span{background:#dcebb7;border-radius:50%;display:inline-grid;place-items:center;width:34px;height:34px;font-size:18px;margin-right:6px}
 .ms-cta-tagline{font-size:12px;color:#7a886b;margin-top:6px}
+/* Modal slide entrance animations */
+@keyframes ms-fade-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes ms-fade-in{from{opacity:0}to{opacity:1}}
+@keyframes ms-scale-in{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+@keyframes ms-bar-grow{from{width:0}to{width:var(--fw)}}
+@keyframes ms-slide-right{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:none}}
+@keyframes ms-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+.modal-slide .ms-eyebrow,.modal-slide .ms-title,.modal-slide .ms-sub,.modal-slide .ms-mockup,.modal-slide .ms-mockup-alt,.modal-slide .ms-split,.modal-slide .ms-decision,.modal-slide .ms-cta{opacity:0}
+.modal-slide.animating .ms-eyebrow{animation:ms-fade-up .5s ease both}
+.modal-slide.animating .ms-title{animation:ms-fade-up .5s ease .1s both}
+.modal-slide.animating .ms-sub{animation:ms-fade-up .5s ease .2s both}
+.modal-slide.animating .ms-mockup,.modal-slide.animating .ms-mockup-alt{animation:ms-scale-in .6s ease .3s both}
+.modal-slide.animating .ms-split{animation:ms-fade-in .5s ease .25s both}
+.modal-slide.animating .ms-decision{animation:ms-scale-in .7s cubic-bezier(.2,0,.2,1) .15s both}
+.modal-slide.animating .ms-cta{animation:ms-fade-up .6s ease .1s both}
+.modal-slide.animating .ms-row{opacity:0;animation:ms-slide-right .4s ease both}
+.modal-slide.animating .ms-row:nth-child(1){animation-delay:.35s}
+.modal-slide.animating .ms-row:nth-child(2){animation-delay:.45s}
+.modal-slide.animating .ms-row:nth-child(3){animation-delay:.55s}
+.modal-slide.animating .ms-row:nth-child(4){animation-delay:.65s}
+.modal-slide.animating .ms-row:nth-child(5){animation-delay:.75s}
+.modal-slide.animating .ms-warn,.modal-slide.animating .ms-safe,.modal-slide.animating .ms-status{opacity:0;animation:ms-fade-up .4s ease .7s both}
+.modal-slide.animating .ms-map-fill{animation:ms-bar-grow .8s ease .5s both}
+.modal-slide.animating .ms-card{opacity:0;animation:ms-fade-up .5s ease both}
+.modal-slide.animating .ms-card:nth-child(1){animation-delay:.3s}
+.modal-slide.animating .ms-card:nth-child(2){animation-delay:.5s}
+.modal-slide.animating .ms-card-item{opacity:0;animation:ms-slide-right .35s ease both}
+.modal-slide.animating .ms-card:nth-child(1) .ms-card-item:nth-child(2){animation-delay:.45s}
+.modal-slide.animating .ms-card:nth-child(1) .ms-card-item:nth-child(3){animation-delay:.55s}
+.modal-slide.animating .ms-card:nth-child(1) .ms-card-item:nth-child(4){animation-delay:.65s}
+.modal-slide.animating .ms-card:nth-child(2) .ms-card-item:nth-child(2){animation-delay:.65s}
+.modal-slide.animating .ms-card:nth-child(2) .ms-card-item:nth-child(3){animation-delay:.75s}
+.modal-slide.animating .ms-card:nth-child(2) .ms-card-item:nth-child(4){animation-delay:.85s}
+.modal-slide.animating .ms-agent-tag{opacity:0;animation:ms-scale-in .3s ease both}
+.modal-slide.animating .ms-row:nth-child(1) .ms-agent-tag{animation-delay:.5s}
+.modal-slide.animating .ms-row:nth-child(2) .ms-agent-tag{animation-delay:.6s}
+.modal-slide.animating .ms-row:nth-child(3) .ms-agent-tag{animation-delay:.7s}
+.modal-slide.animating .ms-row:nth-child(4) .ms-agent-tag{animation-delay:.8s}
+.modal-slide.animating .ms-cta-pricing{opacity:0;animation:ms-fade-up .5s ease .4s both}
+.modal-slide.animating .ms-cta-logo{opacity:0;animation:ms-scale-in .5s ease .6s both}
+@media(prefers-reduced-motion:reduce){.modal-slide .ms-eyebrow,.modal-slide .ms-title,.modal-slide .ms-sub,.modal-slide .ms-mockup,.modal-slide .ms-mockup-alt,.modal-slide .ms-split,.modal-slide .ms-decision,.modal-slide .ms-cta,.modal-slide.animating .ms-row,.modal-slide.animating .ms-warn,.modal-slide.animating .ms-safe,.modal-slide.animating .ms-status,.modal-slide.animating .ms-card,.modal-slide.animating .ms-card-item,.modal-slide.animating .ms-agent-tag,.modal-slide.animating .ms-cta-pricing,.modal-slide.animating .ms-cta-logo{opacity:1;animation:none;transform:none}}
 /* Modal bottom bar */
 .modal-bottom{padding:14px 44px 18px;display:flex;align-items:center;gap:16px;border-top:1px solid #e7eadf}
 .modal-progress{flex:1;height:3px;background:#dce1d4;border-radius:2px;overflow:hidden}
