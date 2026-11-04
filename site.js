@@ -19,7 +19,7 @@ const blob=new Blob([html],{type:'text/html'});const url=URL.createObjectURL(blo
 modalSlides.forEach((s,i)=>{const d=document.createElement('div');d.className='modal-slide';d.innerHTML=(s.eyebrow?'<p class="ms-eyebrow">'+s.eyebrow+'</p>':'')+(s.title?'<h3 class="ms-title">'+s.title+'</h3>':'')+(s.sub?'<p class="ms-sub">'+s.sub+'</p>':'')+s.body;track.append(d)});
 function goModal(n){cur=((n%total)+total)%total;track.style.transform='translateX(-'+cur*100+'%)';fill.style.width=(cur+1)/total*100+'%';cap.textContent=modalSlides[cur].caption}
 function startTimer(){clearInterval(timer);timer=setInterval(()=>{if(!document.hidden)goModal(cur+1)},4500)}
-openBtn.onclick=()=>{modal.hidden=false;requestAnimationFrame(()=>{modal.classList.add('open')});goModal(0);startTimer();document.body.style.overflow='hidden'};
+openBtn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();modal.hidden=false;requestAnimationFrame(()=>{modal.classList.add('open')});goModal(0);startTimer();document.body.style.overflow='hidden'});
 document.getElementById('close-walkthrough').onclick=()=>{modal.classList.remove('open');setTimeout(()=>{modal.hidden=true},300);clearInterval(timer);document.body.style.overflow=''};
 modal.onclick=e=>{if(e.target===modal){modal.classList.remove('open');setTimeout(()=>{modal.hidden=true},300);clearInterval(timer);document.body.style.overflow=''}};
 document.addEventListener('keydown',e=>{if(modal.hidden)return;if(e.key==='Escape'){modal.classList.remove('open');setTimeout(()=>{modal.hidden=true},300);clearInterval(timer);document.body.style.overflow=''}if(e.key==='ArrowRight'){goModal(cur+1);startTimer()}if(e.key==='ArrowLeft'){goModal(cur-1);startTimer()}})})();
