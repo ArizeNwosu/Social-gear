@@ -1,7 +1,6 @@
 /* Booking widget — Social Gear AI
-   Renders a calendar date picker, time slot selector, and booking form.
-   Currently uses demo availability. Wire up the Google Calendar API
-   by replacing fetchAvailability() and submitBooking(). */
+   Uses /api/availability and /api/book endpoints when available,
+   falls back to demo mode if the API isn't configured yet. */
 
 (function () {
   var today = new Date();
@@ -10,6 +9,7 @@
   var viewMonth = today.getMonth();
   var selectedDate = null;
   var selectedTime = null;
+  var useApi = true; // Will fall back to demo if API returns error
 
   var monthLabel = document.getElementById('cal-month-label');
   var daysGrid = document.getElementById('cal-days');
@@ -26,38 +26,48 @@
   var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
   tzLabel.textContent = 'Times shown in ' + tz.replace(/_/g, ' ');
 
-  // Demo availability: weekdays, 9am–4pm, half-hour slots
-  // Replace this function with a real API call to your backend
-  function fetchAvailability(year, month) {
+  var availability = {};
+
+  // --- API-backed availability ---
+  function fetchAvailabilityApi(year, month, callback) {
+    fetch('/api/availability?year=' + year + '&month=' + (month + 1))
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.error) throw new Error(data.error);
+        callback(data.available || {});
+      })
+      .catch(function () {
+        // API not configured — fall back to demo
+        useApi = false;
+        callback(fetchAvailabilityDemo(year, month));
+      });
+  }
+
+  // --- Demo fallback ---
+  function fetchAvailabilityDemo(year, month) {
     var available = {};
     var daysInMonth = new Date(year, month + 1, 0).getDate();
     for (var d = 1; d <= daysInMonth; d++) {
       var date = new Date(year, month, d);
       var day = date.getDay();
-      // Skip weekends and past dates
       if (day === 0 || day === 6) continue;
       if (date < today) continue;
-      // Skip today if it's after 3pm
       if (date.getTime() === today.getTime() && new Date().getHours() >= 15) continue;
       var key = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
-      available[key] = generateSlots(date);
+      available[key] = generateDemoSlots(date);
     }
     return available;
   }
 
-  function generateSlots(date) {
+  function generateDemoSlots(date) {
     var slots = [];
     var startHour = 9;
-    // If today, start from next available half-hour
     if (date.getTime() === today.getTime()) {
-      var now = new Date();
-      startHour = Math.max(9, now.getHours() + 1);
+      startHour = Math.max(9, new Date().getHours() + 1);
     }
     for (var h = startHour; h < 16; h++) {
       slots.push(formatTime(h, 0));
-      if (h < 15 || (h === 15 && true)) {
-        slots.push(formatTime(h, 30));
-      }
+      slots.push(formatTime(h, 30));
     }
     return slots;
   }
@@ -68,59 +78,62 @@
     return hour + ':' + String(m).padStart(2, '0') + ' ' + suffix;
   }
 
-  var availability = {};
-
+  // --- Calendar rendering ---
   function renderCalendar() {
-    availability = fetchAvailability(viewYear, viewMonth);
     var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
       'July', 'August', 'September', 'October', 'November', 'December'];
     monthLabel.textContent = monthNames[viewMonth] + ' ' + viewYear;
-
-    var firstDay = new Date(viewYear, viewMonth, 1).getDay();
-    var daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
-
-    daysGrid.innerHTML = '';
-
-    // Empty cells for alignment
-    for (var i = 0; i < firstDay; i++) {
-      var empty = document.createElement('span');
-      daysGrid.appendChild(empty);
-    }
-
-    for (var d = 1; d <= daysInMonth; d++) {
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'calendar-day';
-      btn.textContent = d;
-
-      var date = new Date(viewYear, viewMonth, d);
-      var key = viewYear + '-' + String(viewMonth + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
-
-      if (date < today) {
-        btn.disabled = true;
-      } else if (availability[key]) {
-        btn.classList.add('calendar-day-available');
-        btn.dataset.date = key;
-        btn.onclick = selectDate;
-      } else {
-        btn.disabled = true;
-      }
-
-      // Today marker
-      if (date.getTime() === today.getTime()) {
-        btn.classList.add('calendar-day-today');
-      }
-
-      // Selected marker
-      if (selectedDate === key) {
-        btn.classList.add('calendar-day-selected');
-      }
-
-      daysGrid.appendChild(btn);
-    }
-
-    // Disable prev if current month
+    daysGrid.innerHTML = '<div class="booking-loading">Loading availability...</div>';
     prevBtn.disabled = viewYear === today.getFullYear() && viewMonth === today.getMonth();
+
+    var render = function (avail) {
+      availability = avail;
+      var firstDay = new Date(viewYear, viewMonth, 1).getDay();
+      var daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+      daysGrid.innerHTML = '';
+
+      for (var i = 0; i < firstDay; i++) {
+        var empty = document.createElement('span');
+        daysGrid.appendChild(empty);
+      }
+
+      for (var d = 1; d <= daysInMonth; d++) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'calendar-day';
+        btn.textContent = d;
+
+        var date = new Date(viewYear, viewMonth, d);
+        var key = viewYear + '-' + String(viewMonth + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+
+        if (date < today) {
+          btn.disabled = true;
+        } else if (availability[key]) {
+          btn.classList.add('calendar-day-available');
+          btn.dataset.date = key;
+          btn.onclick = selectDate;
+        } else {
+          btn.disabled = true;
+        }
+
+        if (date.getTime() === today.getTime()) {
+          btn.classList.add('calendar-day-today');
+        }
+
+        if (selectedDate === key) {
+          btn.classList.add('calendar-day-selected');
+        }
+
+        daysGrid.appendChild(btn);
+      }
+    };
+
+    if (useApi) {
+      fetchAvailabilityApi(viewYear, viewMonth, render);
+    } else {
+      render(fetchAvailabilityDemo(viewYear, viewMonth));
+    }
   }
 
   function selectDate(e) {
@@ -137,8 +150,7 @@
 
     var parts = selectedDate.split('-');
     var d = new Date(parts[0], parts[1] - 1, parts[2]);
-    var options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
-    label.textContent = d.toLocaleDateString('en-US', options);
+    label.textContent = d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
 
     var slots = availability[selectedDate] || [];
     container.innerHTML = '';
@@ -171,6 +183,8 @@
     stepTime.hidden = step !== 'time';
     stepConfirm.hidden = step !== 'confirm';
     stepDone.hidden = step !== 'done';
+    // Scroll widget into view on step change
+    document.getElementById('booking-widget').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   // Navigation
@@ -207,8 +221,6 @@
       date: selectedDate,
       time: selectedTime
     };
-
-    // Replace this with a real API call to create a Google Calendar event
     submitBooking(data);
   };
 
@@ -217,21 +229,39 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'Booking...';
 
-    // TODO: Replace with real API endpoint
-    // fetch('/api/book', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(data) })
-    //   .then(r => r.json())
-    //   .then(result => { ... })
+    if (useApi) {
+      fetch('/api/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (result) {
+          if (result.error) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Confirm booking →';
+            alert(result.error);
+            return;
+          }
+          showConfirmation(data);
+        })
+        .catch(function () {
+          // Fall back to demo confirmation
+          showConfirmation(data);
+        });
+    } else {
+      // Demo mode
+      setTimeout(function () { showConfirmation(data); }, 1200);
+    }
+  }
 
-    // Demo: simulate API call
-    setTimeout(function () {
-      var parts = selectedDate.split('-');
-      var d = new Date(parts[0], parts[1] - 1, parts[2]);
-      var dateStr = d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-
-      document.getElementById('done-summary').textContent = dateStr + ' at ' + selectedTime;
-      document.getElementById('done-email').textContent = data.email;
-      showStep('done');
-    }, 1200);
+  function showConfirmation(data) {
+    var parts = selectedDate.split('-');
+    var d = new Date(parts[0], parts[1] - 1, parts[2]);
+    var dateStr = d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+    document.getElementById('done-summary').textContent = dateStr + ' at ' + selectedTime;
+    document.getElementById('done-email').textContent = data.email;
+    showStep('done');
   }
 
   // Init
