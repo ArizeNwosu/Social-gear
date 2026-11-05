@@ -178,6 +178,13 @@
   padding: 0;
   flex: 0 0 60px;
   font-size: 0;
+  background: none;
+  width: auto;
+  height: auto;
+  position: static;
+}
+.homepage .pipeline-arrow::after {
+  content: none;
 }
 
 /* ── Automation step auto-advance animation ── */
