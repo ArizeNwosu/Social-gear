@@ -17,6 +17,9 @@
   grid-template-columns: 300px 1fr;
   min-height: 480px;
 }
+.booking-step[hidden] {
+  display: none;
+}
 
 /* Sidebar */
 .booking-sidebar {
