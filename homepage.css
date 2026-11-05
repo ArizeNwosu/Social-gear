@@ -1,14 +1,6 @@
-/* Homepage: stacked sections with a two-column desktop hero. */
-.homepage .promise,
-.homepage .promise-illustrated,
-.homepage .dark-intro,
-.homepage .story,
-.homepage .final-cta,
-.homepage .function-grid,
-.homepage .map-pricing {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-}
+/* Homepage: stacked single-column sections with clear vertical hierarchy. */
+
+/* ── Hero: keep two-column on desktop ── */
 .homepage .home-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, .85fr);
@@ -28,51 +20,78 @@
   align-items: stretch;
   margin: 0;
 }
+
+/* ── Force ALL content sections to single column ── */
+.homepage .promise-illustrated,
+.homepage .dark-intro,
+.homepage .story,
+.homepage .final-cta {
+  display: flex !important;
+  flex-direction: column !important;
+  grid-template-columns: none !important;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+/* Section children: full width, capped for readability */
+.homepage .promise-illustrated > div,
+.homepage .dark-intro > div,
+.homepage .story > div {
+  min-width: 0;
+  width: 100%;
+  max-width: 760px;
+}
+
+/* Mockups and scenes: full width within section */
+.homepage .promise-illustrated > .mockup,
+.homepage .dark-intro > .mockup,
+.homepage .story > .scene {
+  width: 100%;
+  max-width: 760px;
+}
+
+/* Trust section: mockup comes after text (was visually first in markup) */
+.homepage .promise-illustrated > .mockup:first-child {
+  order: 2;
+}
+
+/* Text content: comfortable reading width */
+.homepage .promise-illustrated > div > p,
+.homepage .promise-illustrated > div > h2,
+.homepage .story p,
+.homepage .story h3 {
+  max-width: 680px;
+}
+.homepage .promise-illustrated > div > a,
+.homepage .promise a {
+  grid-column: auto;
+}
+
+/* ── Constrain section widths for focus ── */
 .homepage .promise,
 .homepage .reference-sections,
 .homepage .dark-band > .shell {
   max-width: 960px;
 }
-.homepage .promise,
-.homepage .dark-intro,
-.homepage .story {
-  gap: 32px;
-  align-items: start;
-}
-.homepage .promise > div,
-.homepage .dark-intro > div,
-.homepage .story > div {
-  min-width: 0;
-  width: 100%;
-}
-.homepage .promise > div:not(.mockup),
-.homepage .dark-intro > div:not(.mockup),
-.homepage .story > div:not(.scene) {
-  max-width: 720px;
-}
-.homepage .promise p,
-.homepage .promise-illustrated > div > p,
-.homepage .story p,
-.homepage .story h3 {
-  max-width: 680px;
-}
-.homepage .promise > .mockup,
-.homepage .dark-intro > .mockup,
-.homepage .story > .scene {
+
+/* ── Pricing: keep 3-column grid for cards ── */
+.homepage .map-pricing {
   max-width: 760px;
 }
-/* The trust illustration precedes its copy in the original markup. */
-.homepage .promise-illustrated > .mockup:first-child { order: 2; }
-.homepage .promise a { grid-column: auto; }
-.homepage .function-grid,
-.homepage .map-pricing { gap: 16px; }
-.homepage .map-pricing { max-width: 760px; }
-.homepage .map-pricing strong { min-height: 0; }
-.homepage .map-pricing a { align-self: start; min-width: 200px; }
-.homepage .final-cta {
-  max-width: 960px;
-  gap: 24px;
+.homepage .map-pricing strong {
+  min-height: 0;
 }
+.homepage .map-pricing a {
+  align-self: start;
+  min-width: 200px;
+}
+
+/* ── Function grid: keep multi-column for buttons ── */
+.homepage .function-grid {
+  gap: 16px;
+}
+
+/* ── Final CTA: stacked ── */
 .homepage .final-cta > .eyebrow,
 .homepage .final-cta > h2,
 .homepage .final-cta > .button,
@@ -80,18 +99,37 @@
   grid-column: auto;
   grid-row: auto;
 }
-.homepage .final-cta > h2 { margin: 0; }
+.homepage .final-cta > h2 {
+  margin: 0;
+}
 .homepage .final-cta > .mockup {
   width: 100%;
   max-width: 640px;
   margin: 0 !important;
   transform: none;
 }
+
+/* ── Section spacing: clear vertical rhythm ── */
+.homepage .promise {
+  padding: 80px 0;
+}
+.homepage .dark-band {
+  padding: 80px 0;
+}
+.homepage .reference-sections {
+  padding: 80px 0 65px;
+}
+
+/* ── Mobile ── */
 @media (max-width: 800px) {
-  .homepage .home-hero { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 44px 0; }
+  .homepage .home-hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    padding: 44px 0;
+  }
   .homepage .home-hero .page-heading { padding: 0; }
   .homepage .hero-wt-wrapper { max-width: 100%; justify-self: center; }
-  .homepage .promise,
+  .homepage .promise-illustrated,
   .homepage .dark-intro,
   .homepage .story { gap: 24px; }
   .homepage .final-cta { padding: 28px; gap: 20px; }
