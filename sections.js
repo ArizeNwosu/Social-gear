@@ -24,8 +24,8 @@ function advancePipeline(){
   if(result)result.classList.remove('pipeline-result-active');
   if(pipeStep<nodes.length){
     nodes[pipeStep].classList.add('pipeline-active');
-    for(var i=0;i<pipeStep;i++){if(arrows[i])arrows[i].classList.add('pipeline-arrow-active')}
-  }else{
+    for(var i=0;i<pipeStep;i++){nodes[i].classList.add('pipeline-active');if(arrows[i])arrows[i].classList.add('pipeline-arrow-active')}
+  }else if(pipeStep===nodes.length){
     nodes.forEach(function(n){n.classList.add('pipeline-active')});
     arrows.forEach(function(a){a.classList.add('pipeline-arrow-active')});
     if(result)result.classList.add('pipeline-result-active');

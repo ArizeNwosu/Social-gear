@@ -141,6 +141,45 @@
   color: #fffefa;
 }
 
+/* ── SVG dashed-line connectors ── */
+.homepage .pipeline-svg-arrow {
+  width: 100%;
+  height: 20px;
+  overflow: visible;
+}
+.homepage .pipeline-dash {
+  stroke: #b1bea1;
+  stroke-width: 2.5;
+  stroke-dasharray: 6 5;
+  stroke-linecap: round;
+  fill: none;
+  animation: dash-march 1.2s linear infinite;
+}
+.homepage .pipeline-head {
+  fill: #b1bea1;
+  transition: fill .4s;
+}
+.homepage .pipeline-arrow.pipeline-arrow-active .pipeline-dash {
+  stroke: #244d3d;
+  animation: dash-march-active .6s linear infinite;
+}
+.homepage .pipeline-arrow.pipeline-arrow-active .pipeline-head {
+  fill: #244d3d;
+}
+@keyframes dash-march {
+  to { stroke-dashoffset: -22; }
+}
+@keyframes dash-march-active {
+  to { stroke-dashoffset: -22; }
+}
+.homepage .pipeline-arrow {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  flex: 0 0 60px;
+  font-size: 0;
+}
+
 /* ── Automation step auto-advance animation ── */
 .homepage .automation-steps div {
   transition: border-color .35s, transform .35s, background .35s;
