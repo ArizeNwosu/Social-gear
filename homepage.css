@@ -39,9 +39,9 @@
 }
 
 /* Section children: full width, capped for readability */
-.homepage .promise-illustrated > div,
-.homepage .dark-intro > div,
-.homepage .story > div {
+.homepage .promise-illustrated > div:not(.purpose-explainer),
+.homepage .dark-intro > div:not(.purpose-explainer),
+.homepage .story > div:not(.purpose-explainer) {
   min-width: 0;
   width: 100%;
   max-width: 760px;
