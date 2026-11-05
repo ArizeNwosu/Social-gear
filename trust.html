@@ -1,1 +1,457 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Trust · Social Gear AI</title><meta name="description" content="Practical AI strategy, implementation and support for small businesses."><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="sections.css"><link rel="stylesheet" href="site.css"><link rel="stylesheet" href="refinement.css"></head><body><a class="skip" href="#main">Skip to content</a><header class="shell navigation"><a class="brand" href="index.html"><span>✳</span> Social Gear <b>AI</b></a><button class="menu" aria-expanded="false" aria-controls="navigation">Menu ☰</button><nav id="navigation"><a href="services.html">Services</a><a href="approach.html">Our approach</a><a href="case-studies.html">Case studies</a><a href="pricing.html">Pricing</a><a href="trust.html" aria-current="page">Trust</a><a class="button" href="contact.html">Let’s talk ↗</a></nav></header><main id="main"><section class="shell page-heading"><p class="eyebrow">TRUST</p><h1>Clear permissions.<br>Human judgment.</h1><p class="intro">A practical conversation about data, tools, and responsibility.</p></section><section class="shell editorial"><article class="editorial-row"><h2>Before we connect anything</h2><p>We agree on the information required, who needs access, where data goes, and how long it should be retained. Provider-specific settings and permissions are documented for your review.</p></article><article class="editorial-row"><h2>Decisions stay with your people</h2><p>We identify actions that require approval, including customer communications, financial decisions, and sensitive changes. Illustrations on this website use sample data and do not access an inbox.</p></article><article class="editorial-row"><h2>For your IT team</h2><p>The implementation review covers providers, account ownership, access scopes, retention controls, approval gates, and how to disable or remove access. Specific guarantees depend on the selected tools and agreed scope.</p></article><article class="editorial-row"><h2>Website privacy</h2><p>These local website pages do not collect form submissions or connect to email accounts. External font requests go to Google Fonts. The contact page prepares a message on your device; it does not transmit it to Social Gear AI.</p></article></section></main><section class="shell final-cta"><p class="eyebrow">YOUR NEXT STEP</p><h2>A clearer path starts<br>with a conversation.</h2><a class="button" href="contact.html">Find your starting point ↗</a></section><footer class="shell"><a class="brand" href="index.html">✳ Social Gear AI</a><p>Your AI Sherpa. From first question to everyday progress.</p><div><a href="services.html">Services</a><a href="case-studies.html">Case studies</a><a href="pricing.html">Pricing</a><a href="trust.html" aria-current="page">Data & trust</a><a href="contact.html">Contact</a></div><small>© 2026 Social Gear AI</small></footer><script src="site.js"></script><script src="assessment.js"></script></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Trust · Social Gear AI</title><meta name="description" content="Your email stays yours. We read your team's email to draw the map. The map never sends, moves or deletes anything."><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="sections.css"><link rel="stylesheet" href="site.css"><link rel="stylesheet" href="refinement.css">
+<style>
+  /* ── Trust page overrides ── */
+  .trust-hero {
+    padding: 5rem 0 3.5rem;
+    max-width: 640px;
+  }
+  .trust-hero h1 {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: #25392e;
+    line-height: 1.1;
+    margin: 0.5rem 0 1.25rem;
+  }
+  .trust-hero p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.125rem;
+    color: #687163;
+    line-height: 1.65;
+    max-width: 540px;
+    margin: 0;
+  }
+
+  /* ── Trust points ── */
+  .trust-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    padding: 2.5rem 0 3.5rem;
+  }
+  .trust-point {
+    background: #fffefa;
+    border: 1px solid #d9ded1;
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .trust-point-check {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #244d3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fffefa;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .trust-point-body strong {
+    display: block;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #25392e;
+    margin-bottom: 0.35rem;
+  }
+  .trust-point-body p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9375rem;
+    color: #687163;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* ── Section headings ── */
+  .trust-section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #244d3d;
+    margin: 0 0 1rem;
+  }
+  .trust-section-heading {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    color: #25392e;
+    margin: 0 0 2.5rem;
+    line-height: 1.2;
+  }
+
+  /* ── Flow diagram ── */
+  .flow-section {
+    padding: 3.5rem 0;
+    border-top: 1px solid #d9ded1;
+  }
+  .flow-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 600px;
+  }
+  .flow-step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    position: relative;
+  }
+  .flow-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 42px;
+    bottom: -1px;
+    width: 2px;
+    background: #d9ded1;
+  }
+  .flow-step-num {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f7f5ee;
+    border: 2px solid #244d3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 0.875rem;
+    color: #244d3d;
+    z-index: 1;
+  }
+  .flow-step-card {
+    background: #fffefa;
+    border: 1px solid #d9ded1;
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+    flex: 1;
+  }
+  .flow-step-card strong {
+    display: block;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    color: #25392e;
+    margin-bottom: 0.3rem;
+  }
+  .flow-step-card p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: #687163;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* ── What we read / never do ── */
+  .twin-lists-section {
+    padding: 3.5rem 0;
+    border-top: 1px solid #d9ded1;
+  }
+  .twin-lists {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  @media (max-width: 640px) {
+    .twin-lists { grid-template-columns: 1fr; }
+  }
+  .checklist-block {
+    background: #fffefa;
+    border: 1px solid #d9ded1;
+    border-radius: 12px;
+    padding: 1.75rem;
+  }
+  .checklist-block h3 {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    color: #25392e;
+    margin: 0 0 1.25rem;
+  }
+  .checklist-block ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .checklist-block li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9375rem;
+    color: #687163;
+    line-height: 1.4;
+  }
+  .checklist-block li .mark {
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-top: 1px;
+  }
+  .checklist-block li .mark.yes { color: #244d3d; }
+  .checklist-block li .mark.no  { color: #c0392b; }
+
+  /* ── Privacy rights ── */
+  .privacy-section {
+    padding: 3.5rem 0;
+    border-top: 1px solid #d9ded1;
+  }
+  .privacy-box {
+    background: #f7f5ee;
+    border: 1px solid #d9ded1;
+    border-radius: 12px;
+    padding: 2rem 2.25rem;
+    max-width: 640px;
+  }
+  .privacy-box p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    color: #25392e;
+    line-height: 1.65;
+    margin: 0;
+  }
+  .privacy-box a {
+    color: #244d3d;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: #d9ded1;
+    text-underline-offset: 3px;
+  }
+  .privacy-box a:hover { text-decoration-color: #244d3d; }
+
+  /* ── Partners ── */
+  .partners-section {
+    padding: 3.5rem 0;
+    border-top: 1px solid #d9ded1;
+  }
+  .partners-row {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .partner-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #fffefa;
+    border: 1px solid #d9ded1;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+  }
+  .partner-badge span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #25392e;
+  }
+  .partners-note {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    color: #687163;
+    line-height: 1.6;
+    margin: 1.5rem 0 0;
+    max-width: 540px;
+  }
+
+  /* ── Video ── */
+  .video-section {
+    padding: 3.5rem 0;
+    border-top: 1px solid #d9ded1;
+  }
+  .video-wrapper {
+    position: relative;
+    max-width: 720px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #d9ded1;
+    background: #0a0a0a;
+  }
+  .video-wrapper video {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .video-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.875rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #687163;
+    letter-spacing: 0.03em;
+  }
+  .video-label svg {
+    opacity: 0.7;
+  }
+</style>
+</head><body><a class="skip" href="#main">Skip to content</a><header class="shell navigation"><a class="brand" href="index.html"><span>✳</span> Social Gear <b>AI</b></a><button class="menu" aria-expanded="false" aria-controls="navigation">Menu ☰</button><nav id="navigation"><a href="services.html">Services</a><a href="approach.html">Our approach</a><a href="case-studies.html">Case studies</a><a href="pricing.html">Pricing</a><a href="trust.html" aria-current="page">Trust</a><a class="button" href="contact.html">Let's talk ↗</a></nav></header>
+
+<main id="main">
+
+  <!-- Hero -->
+  <section class="shell">
+    <div class="trust-hero">
+      <p class="trust-section-label">Trust</p>
+      <h1>Your email stays yours.</h1>
+      <p>We read your team's email to draw the map. The map never sends, moves or deletes anything. When you ask us to delete what we read, we do.</p>
+    </div>
+  </section>
+
+  <!-- Four trust points -->
+  <section class="shell">
+    <div class="trust-points">
+      <div class="trust-point">
+        <div class="trust-point-check">✓</div>
+        <div class="trust-point-body">
+          <strong>We only read</strong>
+          <p>The map needs to read your email. It never sends, moves or deletes.</p>
+        </div>
+      </div>
+      <div class="trust-point">
+        <div class="trust-point-check">✓</div>
+        <div class="trust-point-body">
+          <strong>Nothing sends on its own</strong>
+          <p>Agents you add later write drafts. A person says yes before anything goes out.</p>
+        </div>
+      </div>
+      <div class="trust-point">
+        <div class="trust-point-check">✓</div>
+        <div class="trust-point-body">
+          <strong>You can disconnect</strong>
+          <p>Whenever you like. Ask, and we delete what we hold.</p>
+        </div>
+      </div>
+      <div class="trust-point">
+        <div class="trust-point-check">✓</div>
+        <div class="trust-point-body">
+          <strong>Encrypted and stored in North America</strong>
+          <p>On servers in the US, encrypted at rest and in transit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How the connection works -->
+  <section class="shell flow-section">
+    <p class="trust-section-label">How it works</p>
+    <h2 class="trust-section-heading">How the connection works</h2>
+    <div class="flow-steps">
+
+      <div class="flow-step">
+        <div class="flow-step-num">1</div>
+        <div class="flow-step-card">
+          <strong>Your inbox</strong>
+          <p>Microsoft 365 or Google Workspace. You sign in there, so we never see your password.</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-num">2</div>
+        <div class="flow-step-card">
+          <strong>The secure connection</strong>
+          <p>Encrypted OAuth tokens. Revoke any time from your admin console.</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-num">3</div>
+        <div class="flow-step-card">
+          <strong>The audit</strong>
+          <p>We read the period of email you choose, and nothing outside it.</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-num">4</div>
+        <div class="flow-step-card">
+          <strong>Your map</strong>
+          <p>You see it first. You choose who on your team sees it.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- What we read / What we never do -->
+  <section class="shell twin-lists-section">
+    <div class="twin-lists">
+      <div class="checklist-block">
+        <h3>What we read</h3>
+        <ul>
+          <li><span class="mark yes">✓</span> Who wrote to whom, and when</li>
+          <li><span class="mark yes">✓</span> What each thread was about</li>
+          <li><span class="mark yes">✓</span> How long replies took</li>
+          <li><span class="mark yes">✓</span> Which messages repeat</li>
+        </ul>
+      </div>
+      <div class="checklist-block">
+        <h3>What we never do</h3>
+        <ul>
+          <li><span class="mark no">✕</span> Send, move, delete or file your email</li>
+          <li><span class="mark no">✕</span> Train AI models on your email</li>
+          <li><span class="mark no">✕</span> Sell or share your data</li>
+          <li><span class="mark no">✕</span> Keep it after you ask us to delete it</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy rights -->
+  <section class="shell privacy-section">
+    <p class="trust-section-label">Your rights</p>
+    <h2 class="trust-section-heading">Privacy rights</h2>
+    <div class="privacy-box">
+      <p>We follow US privacy law. You can ask what we hold about you, correct it, or have it deleted. Write to <a href="mailto:privacy@social-gear.com">privacy@social-gear.com</a>. We answer within 30 days, usually much sooner.</p>
+    </div>
+  </section>
+
+  <!-- Partners -->
+  <section class="shell partners-section">
+    <p class="trust-section-label">Partners</p>
+    <h2 class="trust-section-heading">Built on trusted platforms</h2>
+    <div class="partners-row">
+      <div class="partner-badge">
+        <svg width="21" height="21" viewBox="0 0 21 21" aria-hidden="true"><rect width="9.5" height="9.5" fill="#f25022"/><rect x="11.5" width="9.5" height="9.5" fill="#7fba00"/><rect y="11.5" width="9.5" height="9.5" fill="#00a4ef"/><rect x="11.5" y="11.5" width="9.5" height="9.5" fill="#ffb900"/></svg>
+        <span>Microsoft Partner</span>
+      </div>
+      <div class="partner-badge">
+        <svg width="21" height="21" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#34A853" d="M10.53 28.59a14.5 14.5 0 0 1 0-9.18l-7.98-6.19a24.0 24.0 0 0 0 0 21.56l7.98-6.19z"/><path fill="#FBBC05" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        <span>Google Workspace</span>
+      </div>
+    </div>
+    <p class="partners-note">Member of the Microsoft AI Cloud Partner Program. Google Workspace integration partner.</p>
+  </section>
+
+  <!-- Video -->
+  <section class="shell video-section">
+    <p class="trust-section-label">See it in action</p>
+    <h2 class="trust-section-heading">Watch how it works</h2>
+    <div class="video-wrapper">
+      <video src="social-gear-video.mp4" controls muted playsinline preload="metadata"></video>
+    </div>
+    <p class="video-label">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+      Sound on
+    </p>
+  </section>
+
+</main>
+
+<section class="shell final-cta"><p class="eyebrow">YOUR NEXT STEP</p><h2>A clearer path starts<br>with a conversation.</h2><a class="button" href="contact.html">Find your starting point ↗</a></section><footer class="shell"><a class="brand" href="index.html">✳ Social Gear AI</a><p>Your AI Sherpa. From first question to everyday progress.</p><div><a href="services.html">Services</a><a href="case-studies.html">Case studies</a><a href="pricing.html">Pricing</a><a href="trust.html" aria-current="page">Data & trust</a><a href="contact.html">Contact</a></div><small>© 2026 Social Gear AI</small></footer><script src="site.js"></script><script src="assessment.js"></script></body></html>
