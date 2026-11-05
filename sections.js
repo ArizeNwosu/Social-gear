@@ -5,8 +5,60 @@ Projects:{title:'Where the hours go, by project',rows:[['Project','Hours / month
 People:{title:'Work patterns across your team',stats:[['Alex','Client relationships'],['Jordan','Operations'],['Casey','Delivery']],rows:[['Role','Recurring task','AI opportunity'],['Client relationships','Weekly check-ins','Draft updates'],['Operations','Intake and scheduling','Organize requests'],['Delivery','Status reporting','Summarize progress']]},
 'Hand-offs':{title:'Who passes work to whom',rows:[['From','To','Work handed over'],['Client team','Operations','Approved project scope'],['Operations','Delivery','Kickoff details'],['Delivery','Client team','Progress and open questions'],['Client team','Finance','Approved billing details']]}}
 const tablist=document.querySelector('.report-tabs'),panel=document.getElementById('report-view');
-function showReport(name){const d=reportViews[name];panel.innerHTML=`<div class="report-heading"><h3>${d.title}</h3><small>SOCIAL GEAR AI · SAMPLE REPORT</small></div>`+(d.stats?`<div class="report-stats">${d.stats.map(v=>`<div class="report-stat"><strong>${v[0]}</strong><span>${v[1]}</span></div>`).join('')}</div>`:'')+`<table class="report-table"><thead><tr>${d.rows[0].map(v=>`<th scope="col">${v}</th>`).join('')}</tr></thead><tbody>${d.rows.slice(1).map(row=>`<tr>${row.map(v=>`<td>${v}</td>`).join('')}</tr>`).join('')}</tbody></table>`;[...tablist.children].forEach(b=>{const on=b.textContent===name;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;if(on)panel.setAttribute('aria-labelledby',b.id)})}
+function showReport(name){const d=reportViews[name];panel.style.animation='none';void panel.offsetWidth;panel.style.animation='';panel.innerHTML=`<div class="report-heading"><h3>${d.title}</h3><small>SOCIAL GEAR AI · SAMPLE REPORT</small></div>`+(d.stats?`<div class="report-stats">${d.stats.map(v=>`<div class="report-stat"><strong>${v[0]}</strong><span>${v[1]}</span></div>`).join('')}</div>`:'')+`<table class="report-table"><thead><tr>${d.rows[0].map(v=>`<th scope="col">${v}</th>`).join('')}</tr></thead><tbody>${d.rows.slice(1).map(row=>`<tr>${row.map(v=>`<td>${v}</td>`).join('')}</tr>`).join('')}</tbody></table>`;[...tablist.children].forEach(b=>{const on=b.textContent===name;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;if(on)panel.setAttribute('aria-labelledby',b.id)})}
 Object.keys(reportViews).forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.textContent=name;b.id='report-tab-'+i;b.setAttribute('role','tab');b.setAttribute('aria-controls','report-view');b.onclick=()=>showReport(name);b.onkeydown=e=>{const bs=[...tablist.children];let n;if(e.key==='ArrowRight')n=(i+1)%bs.length;if(e.key==='ArrowLeft')n=(i+bs.length-1)%bs.length;if(e.key==='Home')n=0;if(e.key==='End')n=bs.length-1;if(n!==undefined){e.preventDefault();bs[n].click();bs[n].focus()}};tablist.append(b)});showReport('Overview');
 const functions=[['◎','Sales and pipeline','Respond to inquiries and follow up on quotes.',['Inquiry arrives','AI drafts a relevant reply','You review and approve']],['▤','Collections and cash','Keep invoices and payment reminders moving.',['Invoice becomes due','AI prepares a reminder','You confirm before sending']],['♡','Client retention and upsell','Stay close to clients and spot their next need.',['Client milestone arrives','AI suggests a check-in','You review the approach']],['✉','Marketing and reviews','Keep content and customer responses consistent.',['New review arrives','AI drafts a response','You approve publication']],['✓','Operations and delivery','Organize jobs, updates, and next steps.',['Job update received','AI prepares a handoff','Your team confirms details']],['▦','Admin and back office','Turn meeting notes and documents into action.',['Meeting notes arrive','AI extracts actions','Your team assigns owners']]];
 let selectedFunction=0,step=-1;const grid=document.querySelector('.function-grid'),run=document.getElementById('run-automation');function chooseFunction(i){selectedFunction=i;step=-1;document.getElementById('automation-name').textContent=functions[i][1];document.getElementById('automation-steps').innerHTML=functions[i][3].map((s,n)=>`<div><b>0${n+1}</b><p>${s}</p></div>`).join('');[...grid.children].forEach((b,n)=>b.setAttribute('aria-pressed',String(n===i)));run.textContent='Run example →';document.getElementById('automation-status').textContent='Illustrative example. No messages are sent or records changed.'}
-functions.forEach((f,i)=>{const b=document.createElement('button');b.type='button';b.innerHTML=`<span class="function-icon" aria-hidden="true">${f[0]}</span><span><b>${f[1]}</b><small>${f[2]}</small></span>`;b.onclick=()=>chooseFunction(i);grid.append(b)});chooseFunction(0);run.onclick=()=>{step=(step+1)%4;document.querySelectorAll('#automation-steps>div').forEach((el,i)=>el.classList.toggle('active',i===Math.min(step,2)));document.getElementById('automation-status').textContent=step===3?'Approved in this demo. Nothing was sent.':functions[selectedFunction][3][step];run.textContent=step===3?'Replay example →':step===2?'Approve sample draft ✓':'Next step →'};
+functions.forEach((f,i)=>{const b=document.createElement('button');b.type='button';b.innerHTML=`<span class="function-icon" aria-hidden="true">${f[0]}</span><span><b>${f[1]}</b><small>${f[2]}</small></span>`;b.onclick=()=>{autoStep=-1;chooseFunction(i)};grid.append(b)});chooseFunction(0);run.onclick=()=>{step=(step+1)%4;document.querySelectorAll('#automation-steps>div').forEach((el,i)=>el.classList.toggle('active',i===Math.min(step,2)));document.getElementById('automation-status').textContent=step===3?'Approved in this demo. Nothing was sent.':functions[selectedFunction][3][step];run.textContent=step===3?'Replay example →':step===2?'Approve sample draft ✓':'Next step →'};
+
+/* ── Pipeline auto-flow animation ── */
+;(function(){
+var nodes=document.querySelectorAll('.pipeline-node');
+var arrows=document.querySelectorAll('.pipeline-arrow');
+var result=document.querySelector('.pipeline-result');
+if(!nodes.length)return;
+var pipeStep=0,pipeVisible=false;
+function advancePipeline(){
+  nodes.forEach(function(n){n.classList.remove('pipeline-active')});
+  arrows.forEach(function(a){a.classList.remove('pipeline-arrow-active')});
+  if(result)result.classList.remove('pipeline-result-active');
+  if(pipeStep<nodes.length){
+    nodes[pipeStep].classList.add('pipeline-active');
+    for(var i=0;i<pipeStep;i++){if(arrows[i])arrows[i].classList.add('pipeline-arrow-active')}
+  }else{
+    nodes.forEach(function(n){n.classList.add('pipeline-active')});
+    arrows.forEach(function(a){a.classList.add('pipeline-arrow-active')});
+    if(result)result.classList.add('pipeline-result-active');
+  }
+  pipeStep=(pipeStep+1)%(nodes.length+2);
+}
+var pipeObs=new IntersectionObserver(function(e){pipeVisible=e[0].isIntersecting},{threshold:0.3});
+pipeObs.observe(nodes[0].closest('.mockup')||nodes[0].parentElement);
+setInterval(function(){if(pipeVisible&&!document.hidden)advancePipeline()},1800);
+advancePipeline();
+})();
+
+/* ── Automation example auto-cycle ── */
+var autoStep=-1,autoVisible=false;
+;(function(){
+var preview=document.querySelector('.automation-preview');
+if(!preview)return;
+var autoObs=new IntersectionObserver(function(e){autoVisible=e[0].isIntersecting},{threshold:0.3});
+autoObs.observe(preview);
+setInterval(function(){
+  if(!autoVisible||document.hidden)return;
+  autoStep=(autoStep+1)%4;
+  var stepEls=document.querySelectorAll('#automation-steps>div');
+  stepEls.forEach(function(el,i){el.classList.toggle('active',i<=Math.min(autoStep,2))});
+  var status=document.getElementById('automation-status');
+  var runBtn=document.getElementById('run-automation');
+  if(autoStep===3){
+    status.textContent='Approved in this demo. Nothing was sent.';
+    runBtn.textContent='Replay example →';
+    setTimeout(function(){autoStep=-1;stepEls.forEach(function(el){el.classList.remove('active')});status.textContent='Illustrative example. No messages are sent or records changed.';runBtn.textContent='Run example →'},2000);
+  }else{
+    status.textContent=functions[selectedFunction][3][autoStep];
+    runBtn.textContent=autoStep===2?'Approve sample draft ✓':'Next step →';
+  }
+},2200);
+})();
