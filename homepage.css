@@ -79,7 +79,8 @@
 
 /* ── Pricing: keep 3-column grid for cards ── */
 .homepage .map-pricing {
-  max-width: 760px;
+  max-width: 100%;
+  width: 100%;
 }
 .homepage .map-pricing strong {
   min-height: 0;
