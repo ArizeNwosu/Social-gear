@@ -1,0 +1,114 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Book a Conversation · Social Gear AI</title><meta name="description" content="Schedule a free introductory conversation with Social Gear AI."><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="sections.css"><link rel="stylesheet" href="site.css"><link rel="stylesheet" href="refinement.css"><link rel="stylesheet" href="booking.css"></head><body><a class="skip" href="#main">Skip to content</a><header class="shell navigation"><a class="brand" href="index.html"><span>✳</span> Social Gear <b>AI</b></a><button class="menu" aria-expanded="false" aria-controls="navigation">Menu ☰</button><nav id="navigation"><a href="services.html">Services</a><a href="approach.html">Our approach</a><a href="examples.html">Examples</a><a href="pricing.html">Pricing</a><a href="trust.html">Trust</a><a href="blog.html">Insights</a><a class="button" href="contact.html">Let's talk ↗</a></nav></header>
+<main id="main">
+<section class="shell page-heading">
+<p class="eyebrow">SCHEDULE A CONVERSATION</p>
+<h1>Pick a time<br>that works for you.</h1>
+<p class="intro">30 minutes, no pitch. We'll talk about your business and where AI might help.</p>
+</section>
+<section class="shell booking-layout">
+<div class="booking-widget" id="booking-widget">
+<!-- Step 1: Date selection -->
+<div class="booking-step" id="step-date">
+<div class="booking-sidebar">
+<div class="booking-host">
+<span class="booking-avatar">✳</span>
+<div>
+<strong>Social Gear AI</strong>
+<small>Introductory Conversation</small>
+</div>
+</div>
+<div class="booking-details">
+<div class="booking-detail"><span class="booking-detail-icon">◷</span> 30 minutes</div>
+<div class="booking-detail"><span class="booking-detail-icon">◉</span> Google Meet</div>
+<div class="booking-detail"><span class="booking-detail-icon">◈</span> Free — no obligation</div>
+</div>
+<p class="booking-description">We'll discuss your current workflows, where your team spends the most time, and whether AI could help. Come with a question or a bottleneck.</p>
+</div>
+<div class="booking-main">
+<h2 class="booking-section-title">Select a date</h2>
+<div class="calendar-nav">
+<button type="button" id="cal-prev" aria-label="Previous month">←</button>
+<span id="cal-month-label"></span>
+<button type="button" id="cal-next" aria-label="Next month">→</button>
+</div>
+<div class="calendar-grid">
+<div class="calendar-header">
+<span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+</div>
+<div class="calendar-days" id="cal-days"></div>
+</div>
+<p class="booking-timezone" id="booking-tz"></p>
+</div>
+</div>
+
+<!-- Step 2: Time selection -->
+<div class="booking-step" id="step-time" hidden>
+<div class="booking-sidebar">
+<div class="booking-host">
+<span class="booking-avatar">✳</span>
+<div>
+<strong>Social Gear AI</strong>
+<small>Introductory Conversation</small>
+</div>
+</div>
+<div class="booking-details">
+<div class="booking-detail"><span class="booking-detail-icon">◷</span> 30 minutes</div>
+<div class="booking-detail"><span class="booking-detail-icon">◉</span> Google Meet</div>
+<div class="booking-detail"><span class="booking-detail-icon">◈</span> Free — no obligation</div>
+</div>
+<button type="button" class="booking-back" id="back-to-date">← Change date</button>
+</div>
+<div class="booking-main">
+<h2 class="booking-section-title">Select a time</h2>
+<p class="booking-selected-date" id="selected-date-label"></p>
+<div class="time-slots" id="time-slots"></div>
+</div>
+</div>
+
+<!-- Step 3: Confirm details -->
+<div class="booking-step" id="step-confirm" hidden>
+<div class="booking-sidebar">
+<div class="booking-host">
+<span class="booking-avatar">✳</span>
+<div>
+<strong>Social Gear AI</strong>
+<small>Introductory Conversation</small>
+</div>
+</div>
+<div class="booking-summary">
+<div class="booking-detail"><span class="booking-detail-icon">▣</span> <span id="summary-date"></span></div>
+<div class="booking-detail"><span class="booking-detail-icon">◷</span> <span id="summary-time"></span></div>
+<div class="booking-detail"><span class="booking-detail-icon">◉</span> Google Meet</div>
+</div>
+<button type="button" class="booking-back" id="back-to-time">← Change time</button>
+</div>
+<div class="booking-main">
+<h2 class="booking-section-title">Your details</h2>
+<form id="booking-form" class="booking-form">
+<label>Name <input name="name" required autocomplete="name"></label>
+<label>Email <input name="email" type="email" required autocomplete="email"></label>
+<label>Company <input name="company" autocomplete="organization"></label>
+<label>What would you like to discuss? <textarea name="notes" rows="3" placeholder="A question, a workflow, or a bottleneck."></textarea></label>
+<button type="submit" class="button booking-submit">Confirm booking →</button>
+<p class="booking-note">You'll receive a calendar invitation with a Google Meet link.</p>
+</form>
+</div>
+</div>
+
+<!-- Step 4: Confirmation -->
+<div class="booking-step" id="step-done" hidden>
+<div class="booking-confirmed">
+<span class="booking-confirmed-icon">✓</span>
+<h2>You're booked.</h2>
+<p class="booking-confirmed-detail" id="done-summary"></p>
+<p>A calendar invitation has been sent to <strong id="done-email"></strong>.</p>
+<a href="index.html" class="button">Back to Social Gear AI →</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="shell"><a class="brand" href="index.html">✳ Social Gear AI</a><p>Your AI Sherpa. From first question to everyday progress.</p><div><a href="services.html">Services</a><a href="examples.html">Examples</a><a href="pricing.html">Pricing</a><a href="trust.html">Data & trust</a><a href="contact.html">Contact</a></div><small>© 2026 Social Gear AI</small></footer>
+<script src="site.js"></script>
+<script src="booking.js"></script>
+</body></html>
