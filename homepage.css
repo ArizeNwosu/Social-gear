@@ -114,6 +114,13 @@
   transform: none;
 }
 
+/* ── Force reveal: elements inside .home-hero grid don't trigger
+   IntersectionObserver correctly — make them visible immediately ── */
+.homepage [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 /* ── Section spacing: clear vertical rhythm ── */
 .homepage .promise {
   padding: 80px 0;
