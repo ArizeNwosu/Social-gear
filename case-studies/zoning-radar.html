@@ -1,0 +1,207 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Case study by Social Gear AI: a weekly AI brief of zoning and land-use changes in the Conejo Valley and Ventura County."><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<title>Zoning Radar: Conejo & Ventura</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>body{margin:0}
+/* Layout: a weekly broker brief. Masthead, this-week hearings, ranked opportunity cards, compact table, coverage footer.
+   Chips use zoning-map conventions: yellow = residential, red = commercial, violet = industrial/R&D, blue = public/civic. */
+:root {
+  --bg: #f6f7f5;
+  --surface: #ffffff;
+  --ink: #18211d;
+  --muted: #5b6660;
+  --rule: #dfe3df;
+  --accent: #0f5e4b;
+  --accent-soft: #e3efe9;
+  --res: #f2d24b; --res-ink: #4a3d00;
+  --com: #e0584f; --com-ink: #ffffff;
+  --ind: #7b5cc4; --ind-ink: #ffffff;
+  --pub: #3c7fc4; --pub-ink: #ffffff;
+  --hot: #c2410c;
+  --font-display: "Archivo Narrow", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --font-body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #101513; --surface: #171e1b; --ink: #e7ece9; --muted: #9aa69f; --rule: #2a332f;
+  --accent: #5cc4a3; --accent-soft: #1c2c26; --hot: #fb923c; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #101513; --surface: #171e1b; --ink: #e7ece9; --muted: #9aa69f; --rule: #2a332f;
+  --accent: #5cc4a3; --accent-soft: #1c2c26; --hot: #fb923c; color-scheme: dark }
+
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 880px; margin: 0 auto; padding-block: 28px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; letter-spacing: 0.005em; }
+.eyebrow { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.12em; font-size: 12px; color: var(--accent); font-weight: 600; }
+.mast { display: flex; flex-direction: column; gap: 8px; border-bottom: 3px solid var(--ink); padding-bottom: 18px; }
+.mast h1 { font-size: clamp(30px, 5vw, 42px); line-height: 1.05; }
+.mast .meta { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.lead { font-size: 17px; max-width: 65ch; margin: 0; }
+
+.tonight { background: var(--accent-soft); border-left: 4px solid var(--hot); padding: 14px 18px; display: flex; flex-direction: column; gap: 4px; }
+.tonight strong { font-family: var(--font-display); font-size: 17px; }
+.tonight p { margin: 0; }
+
+section { display: flex; flex-direction: column; gap: 14px; }
+section > h2 { font-size: 22px; display: flex; align-items: baseline; gap: 10px; }
+section > h2 .count { font-family: var(--font-mono); font-size: 13px; color: var(--muted); font-weight: 400; }
+
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; }
+.card-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 14px; align-items: baseline; }
+.card h3 { font-size: 21px; line-height: 1.2; }
+.where { font-size: 13px; color: var(--muted); }
+.status { font-size: 12.5px; font-weight: 600; padding: 2px 8px; border-radius: 3px; border: 1px solid var(--rule); white-space: nowrap; }
+.status.hot { color: var(--hot); border-color: var(--hot); }
+.status.done { color: var(--accent); border-color: var(--accent); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: 11.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px; letter-spacing: 0.02em; }
+.chip.res { background: var(--res); color: var(--res-ink); }
+.chip.com { background: var(--com); color: var(--com-ink); }
+.chip.ind { background: var(--ind); color: var(--ind-ink); }
+.chip.pub { background: var(--pub); color: var(--pub-ink); }
+.chip.law { background: transparent; color: var(--ink); border: 1px solid var(--muted); }
+.card p { margin: 0; max-width: 70ch; }
+.why { border-top: 1px dashed var(--rule); padding-top: 10px; }
+.why b { font-family: var(--font-display); letter-spacing: 0.04em; text-transform: uppercase; font-size: 12.5px; color: var(--accent); margin-right: 6px; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px 18px; font-size: 13px; }
+.facts div { display: flex; flex-direction: column; min-width: 0; }
+.facts dt { color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.08em; }
+.facts dd { margin: 0; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.mono { font-family: var(--font-mono); font-size: 12.5px; }
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.tbl { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 620px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--font-display); font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.coverage { font-size: 13.5px; color: var(--muted); display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--rule); padding-top: 18px; }
+.coverage p { margin: 0; max-width: 75ch; }
+@media (prefers-reduced-motion: no-preference) { .card { transition: border-color .15s } .card:hover { border-color: var(--muted) } }
+</style>
+
+</head><body>
+<div class="wrap">
+  <header class="mast">
+    <span class="eyebrow"><a href="../case-studies.html" style="color:inherit;text-decoration:none">← Social Gear AI case studies</a> · Zoning Radar · Weekly brief</span>
+    <h1>Conejo Valley &amp; Ventura County</h1>
+    <div class="meta"><span>Week of November 5, 2026</span><span>Records checked: Sept 6 – Dec 5, 2026</span><span>411 agenda items and state notices scanned · 10 kept</span></div>
+  </header>
+
+  <p class="lead">Two Oxnard plans would let roughly 225 acres take far more housing and mixed use, and one of them went to the Planning Commission on November 5. Amgen's 377,000 sq ft Thousand Oaks building has cleared approval. Ventura County is rezoning every Neighborhood Commercial parcel in the unincorporated area.</p>
+
+  <div class="tonight" role="note">
+    <strong>Snapshot from Thu Nov 5, 2026, 6:00 pm · Oxnard Planning Commission, 305 W. Third St</strong>
+    <p>South Oxnard Connect Specific Plan goes to its hearing. Thirteen opportunity sites along the Saviers Road corridor would get more development capacity. Owners of those sites are the call list.</p>
+  </div>
+
+  <section aria-labelledby="h-top">
+    <h2 id="h-top">Worth a call this week <span class="count">5 items</span></h2>
+
+    <article class="card">
+      <div class="card-head">
+        <div><h3>South Oxnard Connect Specific Plan</h3><div class="where">Oxnard · Saviers Rd corridor, Hueneme Rd to Van Ness Ave/Dollie St</div></div>
+        <span class="status hot">Hearing Nov 5</span>
+      </div>
+      <div class="chips"><span class="chip res">Residential</span><span class="chip com">Mixed use</span><span class="chip law">Rezoning</span><span class="chip law">Housing element</span><span class="chip law">Transit corridor</span></div>
+      <p>The City is proposing a specific plan for about 119 acres along the Gold Coast Transit Route 1 corridor. It raises development capacity on 13 designated opportunity sites and sets objective design standards. A voluntary tier program trades extra density for affordable units. The package includes a general plan and housing element amendment, a zoning map amendment and a Negative Declaration. That night the Commission made its recommendation to City Council.</p>
+      <p class="why"><b>Why it matters</b>Most of the corridor is existing strip retail. Once the plan passes, those owners can build housing or mixed use with objective standards, and many won't know it. Pull the 13 sites from the staff report and call the owners before Council votes.</p>
+      <dl class="facts">
+        <div><dt>Area</dt><dd>~119 acres</dd></div>
+        <div><dt>Case numbers</dt><dd class="mono">PZ 26-620-01 · 26-570-01 · 26-640-01</dd></div>
+        <div><dt>Filed by</dt><dd>City of Oxnard, Long Range Planning</dd></div>
+        <div><dt>Source</dt><dd><a href="https://oxnardca.portal.civicclerk.com/event/6085/files/agenda/11739">Nov 5 agenda</a></dd></div>
+      </dl>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <div><h3>Maulhardt-Stiles: up to 950 homes in East Village</h3><div class="where">Oxnard · Cesar Chavez Dr, Gibraltar St, Camino Del Sol, N. Rose Ave</div></div>
+        <span class="status">Heard Oct 15 · Council next</span>
+      </div>
+      <div class="chips"><span class="chip res">Residential</span><span class="chip com">Commercial</span><span class="chip law">General plan amendment</span><span class="chip law">Zone change</span><span class="chip law">Tentative map</span><span class="chip law">EIR</span></div>
+      <p>A master-planned neighborhood on about 107 acres in the Northeast Community Specific Plan area. It allows up to 950 homes, up to 40,000 sq ft of commercial and 12.9 acres of parks. A tentative map creates master lots for phased development. The Planning Commission considered a recommendation to certify Final EIR No. 2026-01. City Council certification and approval come next.</p>
+      <p class="why"><b>Why it matters</b>Master lots mean builder takedowns in phases, so land brokers and homebuilders should get in early. The 40,000 sq ft of commercial will need retail tenants. Nearby land just gained a large comparable.</p>
+      <dl class="facts">
+        <div><dt>Scale</dt><dd>950 units · 40,000 sq ft · 107 ac</dd></div>
+        <div><dt>Parcels</dt><dd class="mono">214-0-020-615 · -625 · -635</dd></div>
+        <div><dt>Applicant</dt><dd>Sanbell (Tanner Shelton) for the Maulhardt Stiles families</dd></div>
+        <div><dt>Source</dt><dd><a href="https://oxnardca.portal.civicclerk.com/event/6065/files/agenda/11675">Oct 15 agenda</a></dd></div>
+      </dl>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <div><h3>Every Neighborhood Commercial parcel rezoned</h3><div class="where">County of Ventura · all unincorporated C1 parcels</div></div>
+        <span class="status">Commission recommended · Board next</span>
+      </div>
+      <div class="chips"><span class="chip com">Commercial</span><span class="chip law">Rezoning</span><span class="chip law">Zoning code rewrite</span></div>
+      <p>The County is rewriting its non-coastal zoning ordinance. It removes the Commercial Office (CO) and Neighborhood Commercial (C1) zones and rezones every C1 parcel to Commercial Planned Development (CPD). The Planning Commission heard it September 17. The Board of Supervisors acts next.</p>
+      <p class="why"><b>Why it matters</b>Every owner of a C1 parcel in the unincorporated county gets a new zone, with different allowed uses and permit paths. It's an easy reason to call owners and tenants: "your zoning is changing, here's what it means."</p>
+      <dl class="facts">
+        <div><dt>Case</dt><dd class="mono">PL25-0013</dd></div>
+        <div><dt>Applies to</dt><dd>All C1 parcels, non-coastal unincorporated county</dd></div>
+        <div><dt>Source</dt><dd><a href="https://ventura.primegov.com/Portal/Meeting?meetingTemplateId=27916">Sept 17 agenda</a></dd></div>
+      </dl>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <div><h3>Amgen Building 50: 377,256 sq ft life-sciences building</h3><div class="where">Thousand Oaks · 701 Pauling Dr (former Building 14)</div></div>
+        <span class="status done">Approved · state notice Nov 2</span>
+      </div>
+      <div class="chips"><span class="chip ind">R&amp;D / life sciences</span><span class="chip law">Specific plan amendment</span><span class="chip law">Development permit</span></div>
+      <p>A new four-story technology and life-sciences building with a basement, loading dock and site work. It is paired with amendments to the Amgen Center Specific Plan (SP-16), including its height district map. The Planning Commission heard it September 14. The City filed its state Notice of Determination on November 2.</p>
+      <p class="why"><b>Why it matters</b>This is the largest commercial project in the Conejo this cycle. Expect demand for nearby housing, contractors and suppliers, and service retail. It is also a signal for life-science space across the 101 corridor.</p>
+      <dl class="facts">
+        <div><dt>Size</dt><dd>377,256 sq ft · 4 stories</dd></div>
+        <div><dt>Parcels</dt><dd class="mono">526-0-210-135 · 526-0-210-145</dd></div>
+        <div><dt>Cases</dt><dd class="mono">DP 2026-70002 · SP 2026-70001</dd></div>
+        <div><dt>Source</dt><dd><a href="https://ceqanet.lci.ca.gov/">CEQAnet NOD</a> · <a href="https://toaks.primegov.com/Portal/Meeting?meetingTemplateId=9624">Sept 14 agenda</a></dd></div>
+      </dl>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <div><h3>Moorpark Downtown Specific Plan adopted</h3><div class="where">Moorpark · downtown core</div></div>
+        <span class="status done">Approved · state notice Oct 23</span>
+      </div>
+      <div class="chips"><span class="chip res">Residential</span><span class="chip com">Commercial</span><span class="chip law">Rezoning</span><span class="chip law">General plan amendment</span></div>
+      <p>Moorpark filed its Notice of Determination for the Downtown Specific Plan. The plan implements General Plan 2050 and includes a zoning code amendment, a general plan amendment and a zoning map amendment.</p>
+      <p class="why"><b>Why it matters</b>Downtown parcels now sit under new rules. The state notice doesn't say which parcels gained capacity, so read the plan's land-use map before calling. That one gap is the reason this brief needs the city's own documents and not just state filings.</p>
+      <dl class="facts">
+        <div><dt>State file</dt><dd class="mono">SCH 2022050327</dd></div>
+        <div><dt>Source</dt><dd><a href="https://ceqanet.lci.ca.gov/2022050327/5">CEQAnet NOD</a></dd></div>
+      </dl>
+    </article>
+  </section>
+
+  <section aria-labelledby="h-also">
+    <h2 id="h-also">Also on the radar <span class="count">5 items</span></h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Project</th><th>City</th><th>What</th><th>Status</th><th>Parcels / contact</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://ceqanet.lci.ca.gov/2026110091">Cedar Apartments</a></td><td>Ventura</td><td class="num">96 units (15 affordable), 4.86 ac, R-3-2</td><td>Approved, notice Nov 3</td><td>Vacant site; get APN from city file</td></tr>
+          <tr><td><a href="https://ceqanet.lci.ca.gov/2026090683">Thompson Court Apartments</a></td><td>Ventura</td><td class="num">75 units, 3½ stories, 8 very-low-income</td><td>Notice Sept 16</td><td class="mono">073-0-212-190, -200, -270</td></tr>
+          <tr><td><a href="https://ceqanet.lci.ca.gov/2026091094">Two Eleven Condominium Map</a></td><td>Ventura</td><td>Merges 3 lots into a condo subdivision for an entitled project</td><td>Notice Sept 24</td><td class="mono">073-0-121-130, -140, -150</td></tr>
+          <tr><td><a href="https://oxnardca.portal.civicclerk.com/event/6065/files/agenda/11675">Roussey parcel map</a></td><td>Oxnard</td><td class="num">Splits 4.19 ac into 4 parcels</td><td>Heard Oct 15 · Council next</td><td><span class="mono">205-0-443-085</span> · 3451–3501 Saviers Rd · Roussey Family Partnership</td></tr>
+          <tr><td>RiverPark Specific Plan amendment</td><td>Oxnard</td><td>City land in District E moves from Public Facilities to Commercial: Regional</td><td>City Council, Oct 20</td><td class="mono">132-0-033-010 · 132-0-311-065, -075</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="coverage">
+    <p><strong>Covered in this prototype:</strong> Planning Commission, City Council and Board agendas for Thousand Oaks, Camarillo, Oxnard and the County of Ventura, plus state environmental notices (CEQAnet) for all of Ventura County and for Agoura Hills, Calabasas, Westlake Village and Hidden Hills. Camarillo had no qualifying items this period.</p>
+    <p><strong>Not yet covered:</strong> agendas for Simi Valley, Ventura, Moorpark, Agoura Hills, Calabasas and Westlake Village; building permits; owner contact details.</p>
+    <p>This is a snapshot of the week of November 5, 2026. Built from public records. Software picks and ranks the items, and AI writes the summaries. Check the linked source before acting. Outcomes of hearings are not confirmed unless a state notice was filed.</p>
+  <p><a href="../contact.html">Want a brief like this for your market? Let's talk →</a></p>
+  </footer>
+</div>
+
+</body></html>
