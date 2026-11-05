@@ -120,6 +120,10 @@
   opacity: 1 !important;
   transform: none !important;
 }
+.homepage .mockup [data-anim] {
+  opacity: 1 !important;
+  transform: none !important;
+}
 
 /* ── Section spacing: clear vertical rhythm ── */
 .homepage .promise {
