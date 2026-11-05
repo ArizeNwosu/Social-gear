@@ -3,7 +3,7 @@
 
 Company brief (self-reported website information, not independently verified):
 Social Gear AI positions itself as an AI Sherpa and fractional Chief AI Officer for small businesses. Services include workflow assessment, AI strategy, implementation, training, and ongoing support.
-Advertised offers: an individual inbox map is free; a team map costs US$1,500 for up to five inboxes and an hour with an adviser; AI Sherpa starts at US$2,500/month with a three-month minimum. The US$1,500 assessment is credited if the retainer starts within 30 days. Confirm scope, software costs, implementation fees, access, and availability in writing.
+Advertised offers: an individual inbox map is free; a team map costs US$1,500 for up to five inboxes and an hour with an adviser; AI Sherpa starts at US$4,500/month with a three-month minimum. The US$1,500 assessment is credited if the retainer starts within 30 days. Confirm scope, software costs, implementation fees, access, and availability in writing.
 The website contains illustrative workflows and sample metrics, not verified customer outcomes. Inbox connection is not available through this demo. Security guarantees, provider choices, retention settings, and approval requirements must be agreed before implementation. No partner certification or independent performance evidence is established in this brief.
 
 First ask about my business, workflows, budget, existing tools, and data sensitivity. Then assess likely fit, costs and alternatives, evidence I should request, privacy and security questions, and warning signs. Separate known facts from assumptions. Recommend whether to explore this service, start with a smaller project, or consider another option. Do not treat this company brief as an endorsement.`;
