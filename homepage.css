@@ -21,6 +21,11 @@
   margin: 0;
 }
 
+/* ── Sections inside .home-hero grid must span both columns ── */
+.homepage .home-hero > :not(.page-heading):not(.hero-wt-wrapper) {
+  grid-column: 1 / -1;
+}
+
 /* ── Force ALL content sections to single column ── */
 .homepage .promise-illustrated,
 .homepage .dark-intro,
