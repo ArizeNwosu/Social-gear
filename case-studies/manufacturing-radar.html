@@ -1,33 +1,28 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Sample AI tool by Social Gear AI: who will need manufacturing space next in the Valley and Ventura County."><link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<title>Manufacturing Radar</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<style>body{margin:0}
-/* Layout: a briefing for a broker moving into manufacturing space. Thesis strip, then the lead board with a detail drawer, then the building-fit check. */
+<title>Manufacturing Radar · Social Gear AI</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../sections.css">
+<link rel="stylesheet" href="../site.css">
+<link rel="stylesheet" href="../refinement.css">
+<style>
 :root{
-  --bg:#f2f3f0; --surface:#ffffff; --ink:#171d1a; --muted:#5b6560; --line:#d8dcd6;
-  --accent:#b4541c; --accent-soft:#f6e6da; --go:#1f6b4f; --go-soft:#e0efe8; --warn:#8f5d00; --warn-soft:#faf0d9; --bad:#a3352b; --bad-soft:#f8e4e1;
-  --font-ui:"Archivo",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-  --font-data:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --bg:#f7f5ee; --surface:#fffefa; --ink:#25392e; --muted:#687163; --line:#d9ded1;
+  --accent:#244d3d; --accent-soft:#e3ede5; --go:#65834e; --go-soft:#e5ede0; --warn:#8f5d00; --warn-soft:#faf0d9; --bad:#a3352b; --bad-soft:#f8e4e1;
+  --font-ui:'DM Sans',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-data:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#111513; --surface:#1a1f1c; --ink:#e8ece9; --muted:#9ba69f; --line:#2c3430;
-  --accent:#ec9a63; --accent-soft:#3a271b; --go:#72c7a2; --go-soft:#1c3027; --warn:#e4ad52; --warn-soft:#33291a; --bad:#ee8b80; --bad-soft:#38221f; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#111513; --surface:#1a1f1c; --ink:#e8ece9; --muted:#9ba69f; --line:#2c3430;
-  --accent:#ec9a63; --accent-soft:#3a271b; --go:#72c7a2; --go-soft:#1c3027; --warn:#e4ad52; --warn-soft:#33291a; --bad:#ee8b80; --bad-soft:#38221f; color-scheme:dark}
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--font-ui);font-size:15px;line-height:1.5}
-.wrap{max-width:1200px;margin:0 auto;padding-block:24px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.radar-wrap{padding-block:32px 72px}
+.radar-header{padding-top:16px;padding-bottom:28px}
 .eyebrow{font:600 11px var(--font-ui);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
-h1{font-size:clamp(26px,4vw,38px);line-height:1.08;margin:0;font-weight:800;letter-spacing:-.015em;text-wrap:balance;max-width:24ch}
-.lede{color:var(--muted);margin:10px 0 0;max-width:68ch}
+h1.radar-title{font:800 clamp(26px,4vw,38px)/1.08 var(--font-ui);letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:24ch;color:var(--ink)}
+.lede{color:var(--muted);margin:10px 0 0;max-width:68ch;font-size:15px}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:22px}
 .stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:4px;min-width:0}
 .stat b{font:500 24px var(--font-data);color:var(--ink);font-variant-numeric:tabular-nums}
 .stat span{font-size:13px;color:var(--muted)}
 .stat a{font-size:12px;color:var(--accent);margin-top:auto}
-h2{font-size:20px;margin:36px 0 4px;text-wrap:balance}
+h2.radar-h2{font-size:20px;margin:36px 0 4px;text-wrap:balance;color:var(--ink);font-family:var(--font-ui);font-weight:700}
 .hint{color:var(--muted);margin:0 0 14px;font-size:14px;max-width:72ch}
 .filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .chip{font:500 13px var(--font-ui);border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
@@ -39,14 +34,14 @@ h2{font-size:20px;margin:36px 0 4px;text-wrap:balance}
 .lead[aria-current="true"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
 .lead:focus-visible,.chip:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .sc{font:500 18px var(--font-data);color:var(--accent);text-align:center;align-self:center}
-.lead h3{margin:0;font-size:15px}
+.lead h3{margin:0;font-size:15px;color:var(--ink)}
 .lead p{margin:2px 0 0;font-size:13px;color:var(--muted)}
 .pill{display:inline-block;font:600 11px var(--font-ui);letter-spacing:.04em;padding:2px 8px;border-radius:5px;margin-top:6px}
 .pill.expand{background:var(--go-soft);color:var(--go)}
 .pill.backfill{background:var(--accent-soft);color:var(--accent)}
 .pill.watch{background:var(--warn-soft);color:var(--warn)}
 .detail{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);min-width:0}
-.detail h3{margin:0;font-size:20px}
+.detail h3{margin:0;font-size:20px;color:var(--ink)}
 .detail .what{color:var(--muted);margin:2px 0 12px}
 .kv{display:grid;grid-template-columns:120px minmax(0,1fr);gap:6px 12px;font-size:14px;margin:0}
 .kv dt{color:var(--muted)}
@@ -67,18 +62,26 @@ table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:720px}
 th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
 td.ok{color:var(--go)} td.no{color:var(--bad)} td.q{color:var(--warn)}
-footer{margin-top:30px;color:var(--muted);font-size:12px;max-width:85ch}
+.radar-disclaimer{margin-top:30px;color:var(--muted);font-size:12px;max-width:85ch}
+.radar-disclaimer a{color:var(--accent)}
+.back-link{display:inline-block;font-size:13px;font-weight:600;color:var(--accent);margin-bottom:28px;text-decoration:none}
+.back-link:hover{text-decoration:underline}
 </style>
-
 </head><body>
-<div class="wrap">
-  <p class="eyebrow"><a href="../case-studies.html" style="color:inherit">← Social Gear AI case studies</a> · Commercial real estate · Nov 2026</p>
-  <h1>The South Bay is out of manufacturing buildings. The Valley and Ventura are next.</h1>
-  <p class="lede">Aerospace, defense and hardware companies have the money and the contracts to grow, and the places they normally go are full. This board finds who will need space next, using only public information, and explains why each one is a lead.</p>
+<a class="skip" href="#main">Skip to content</a>
+<header class="shell navigation"><a class="brand" href="../index.html"><span>✳</span> Social Gear <b>AI</b></a><button class="menu" aria-expanded="false" aria-controls="navigation">Menu ☰</button><nav id="navigation"><a href="../services.html">Services</a><a href="../approach.html">Our approach</a><a href="../case-studies.html">Case studies</a><a href="../pricing.html">Pricing</a><a href="../trust.html">Trust</a><a href="../blog.html">Insights</a><a class="button" href="../contact.html">Let's talk ↗</a></nav></header>
+<main id="main">
+<section class="shell radar-wrap">
+  <div class="radar-header">
+    <a class="back-link" href="../case-studies.html">← All case studies</a>
+    <p class="eyebrow">Commercial real estate · Nov 2026</p>
+    <h1 class="radar-title">The South Bay is out of manufacturing buildings. The Valley and Ventura are next.</h1>
+    <p class="lede">Aerospace, defense and hardware companies have the money and the contracts to grow, and the places they normally go are full. This board finds who will need space next, using only public information, and explains why each one is a lead.</p>
+  </div>
 
   <div class="stats" id="stats"></div>
 
-  <h2>Leads</h2>
+  <h2 class="radar-h2">Leads</h2>
   <p class="hint">Scored on growth signal, likely timing and how close the need is to your markets. Green tags are published facts; amber tags are our inference to test.</p>
   <div class="filters" id="filters"></div>
   <div class="board">
@@ -86,12 +89,18 @@ footer{margin-top:30px;color:var(--muted);font-size:12px;max-width:85ch}
     <article class="detail" id="detail" aria-live="polite"></article>
   </div>
 
-  <h2>Do the buildings fit?</h2>
+  <h2 class="radar-h2">Do the buildings fit?</h2>
   <p class="hint">What these tenants say they need, checked against two flex buildings listed in Calabasas. Power is the unknown that decides most deals.</p>
   <div class="fit"><table><thead><tr><th>Requirement (from tenant interviews)</th><th>26632 Agoura Rd</th><th>26610 Agoura Rd, Ste 100/110</th></tr></thead><tbody id="fit"></tbody></table></div>
 
-  <footer>Built by Social Gear Media · social-gear.com · from public news, press releases and listings as of Nov 2, 2026. Facts link to their source. Scores and "why it's a lead" are inference, meant to be tested, not stated as fact. Nothing here uses any brokerage's internal data. <a href="../contact.html" style="color:var(--accent)">Want one built for your business?</a></footer>
-</div>
+  <p class="radar-disclaimer">Built by Social Gear Media · social-gear.com · from public news, press releases and listings as of Nov 2, 2026. Facts link to their source. Scores and "why it's a lead" are inference, meant to be tested, not stated as fact. Nothing here uses any brokerage's internal data. <a href="../contact.html">Want one built for your business?</a></p>
+</section>
+</main>
+
+<section class="shell final-cta"><p class="eyebrow">YOUR NEXT STEP</p><h2>A clearer path starts<br>with a conversation.</h2><a class="button" href="../contact.html">Find your starting point ↗</a></section>
+<footer class="shell"><a class="brand" href="../index.html">✳ Social Gear AI</a><p>Your AI Sherpa. From first question to everyday progress.</p><div><a href="../services.html">Services</a><a href="../case-studies.html">Case studies</a><a href="../pricing.html">Pricing</a><a href="../trust.html">Data & trust</a><a href="../blog.html">Insights</a><a href="../contact.html">Contact</a></div><small>© 2026 Social Gear AI</small></footer>
+<script src="../site.js"></script>
+<script src="../assessment.js"></script>
 
 <script>
 const STATS=[

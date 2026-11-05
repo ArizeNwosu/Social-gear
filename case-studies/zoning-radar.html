@@ -1,51 +1,51 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Case study by Social Gear AI: a weekly AI brief of zoning and land-use changes in the Conejo Valley and Ventura County."><link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<title>Zoning Radar: Conejo & Ventura</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<style>body{margin:0}
+<title>Zoning Radar: Conejo &amp; Ventura · Social Gear AI</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../sections.css">
+<link rel="stylesheet" href="../site.css">
+<link rel="stylesheet" href="../refinement.css">
+<style>
 /* Layout: a weekly broker brief. Masthead, this-week hearings, ranked opportunity cards, compact table, coverage footer.
    Chips use zoning-map conventions: yellow = residential, red = commercial, violet = industrial/R&D, blue = public/civic. */
 :root {
-  --bg: #f6f7f5;
-  --surface: #ffffff;
-  --ink: #18211d;
-  --muted: #5b6660;
-  --rule: #dfe3df;
-  --accent: #0f5e4b;
-  --accent-soft: #e3efe9;
+  --bg: #f7f5ee;
+  --surface: #fffefa;
+  --ink: #25392e;
+  --muted: #687163;
+  --rule: #d9ded1;
+  --accent: #244d3d;
+  --accent-soft: #e8eddf;
   --res: #f2d24b; --res-ink: #4a3d00;
   --com: #e0584f; --com-ink: #ffffff;
   --ind: #7b5cc4; --ind-ink: #ffffff;
   --pub: #3c7fc4; --pub-ink: #ffffff;
-  --hot: #c2410c;
-  --font-display: "Archivo Narrow", "Arial Narrow", "Helvetica Neue", sans-serif;
-  --font-body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --hot: #b4541c;
+  --font-display: Manrope, sans-serif;
+  --font-body: 'DM Sans', sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #101513; --surface: #171e1b; --ink: #e7ece9; --muted: #9aa69f; --rule: #2a332f;
-  --accent: #5cc4a3; --accent-soft: #1c2c26; --hot: #fb923c; color-scheme: dark } }
-:root[data-theme="dark"] {
-  --bg: #101513; --surface: #171e1b; --ink: #e7ece9; --muted: #9aa69f; --rule: #2a332f;
-  --accent: #5cc4a3; --accent-soft: #1c2c26; --hot: #fb923c; color-scheme: dark }
 
-body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.55; }
-.wrap { max-width: 880px; margin: 0 auto; padding-block: 28px 56px;
+body { font-variant-emoji: text; }
+
+.back-link { display: inline-block; font-size: 13px; font-weight: 600; color: #244d3d; margin-bottom: 20px; }
+
+.zr-wrap { max-width: 880px; margin: 0 auto; padding-block: 28px 56px;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
   display: flex; flex-direction: column; gap: 28px; }
-h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; letter-spacing: 0.005em; }
-.eyebrow { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.12em; font-size: 12px; color: var(--accent); font-weight: 600; }
+.zr-wrap h1, .zr-wrap h2, .zr-wrap h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; letter-spacing: 0.005em; }
+.zr-eyebrow { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.12em; font-size: 12px; color: var(--accent); font-weight: 600; }
 .mast { display: flex; flex-direction: column; gap: 8px; border-bottom: 3px solid var(--ink); padding-bottom: 18px; }
 .mast h1 { font-size: clamp(30px, 5vw, 42px); line-height: 1.05; }
 .mast .meta { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 4px 18px; }
-.lead { font-size: 17px; max-width: 65ch; margin: 0; }
+.lead { font-size: 17px; max-width: 65ch; margin: 0; font-family: var(--font-body); }
 
 .tonight { background: var(--accent-soft); border-left: 4px solid var(--hot); padding: 14px 18px; display: flex; flex-direction: column; gap: 4px; }
 .tonight strong { font-family: var(--font-display); font-size: 17px; }
-.tonight p { margin: 0; }
+.tonight p { margin: 0; font-family: var(--font-body); }
 
-section { display: flex; flex-direction: column; gap: 14px; }
-section > h2 { font-size: 22px; display: flex; align-items: baseline; gap: 10px; }
-section > h2 .count { font-family: var(--font-mono); font-size: 13px; color: var(--muted); font-weight: 400; }
+.zr-section { display: flex; flex-direction: column; gap: 14px; }
+.zr-section > h2 { font-size: 22px; display: flex; align-items: baseline; gap: 10px; }
+.zr-section > h2 .count { font-family: var(--font-mono); font-size: 13px; color: var(--muted); font-weight: 400; }
 
 .card { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; }
 .card-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 14px; align-items: baseline; }
@@ -61,33 +61,39 @@ section > h2 .count { font-family: var(--font-mono); font-size: 13px; color: var
 .chip.ind { background: var(--ind); color: var(--ind-ink); }
 .chip.pub { background: var(--pub); color: var(--pub-ink); }
 .chip.law { background: transparent; color: var(--ink); border: 1px solid var(--muted); }
-.card p { margin: 0; max-width: 70ch; }
+.card p { margin: 0; max-width: 70ch; font-family: var(--font-body); }
 .why { border-top: 1px dashed var(--rule); padding-top: 10px; }
 .why b { font-family: var(--font-display); letter-spacing: 0.04em; text-transform: uppercase; font-size: 12.5px; color: var(--accent); margin-right: 6px; }
-.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px 18px; font-size: 13px; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px 18px; font-size: 13px; font-family: var(--font-body); }
 .facts div { display: flex; flex-direction: column; min-width: 0; }
 .facts dt { color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.08em; }
 .facts dd { margin: 0; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 .mono { font-family: var(--font-mono); font-size: 12.5px; }
-a { color: var(--accent); text-underline-offset: 2px; }
-a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.zr-wrap a { color: var(--accent); text-underline-offset: 2px; }
+.zr-wrap a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 .tbl { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
-table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 620px; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 620px; font-family: var(--font-body); }
 th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
 th { font-family: var(--font-display); font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
 tr:last-child td { border-bottom: 0; }
 td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
 
-.coverage { font-size: 13.5px; color: var(--muted); display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--rule); padding-top: 18px; }
-.coverage p { margin: 0; max-width: 75ch; }
+.disclaimer { font-size: 13.5px; color: var(--muted); display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--rule); padding-top: 18px; font-family: var(--font-body); }
+.disclaimer p { margin: 0; max-width: 75ch; }
 @media (prefers-reduced-motion: no-preference) { .card { transition: border-color .15s } .card:hover { border-color: var(--muted) } }
 </style>
 
 </head><body>
-<div class="wrap">
+<a class="skip" href="#main">Skip to content</a>
+<header class="shell navigation"><a class="brand" href="../index.html"><span>✳</span> Social Gear <b>AI</b></a><button class="menu" aria-expanded="false" aria-controls="navigation">Menu ☰</button><nav id="navigation"><a href="../services.html">Services</a><a href="../approach.html">Our approach</a><a href="../case-studies.html">Case studies</a><a href="../pricing.html">Pricing</a><a href="../trust.html">Trust</a><a href="../blog.html">Insights</a><a class="button" href="../contact.html">Let's talk ↗</a></nav></header>
+<main id="main">
+<div class="shell">
+<div class="zr-wrap">
+  <a class="back-link" href="../case-studies.html">← All case studies</a>
+
   <header class="mast">
-    <span class="eyebrow"><a href="../case-studies.html" style="color:inherit;text-decoration:none">← Social Gear AI case studies</a> · Zoning Radar · Weekly brief</span>
+    <span class="zr-eyebrow">Zoning Radar · Weekly brief</span>
     <h1>Conejo Valley &amp; Ventura County</h1>
     <div class="meta"><span>Week of November 5, 2026</span><span>Records checked: Sept 6 – Dec 5, 2026</span><span>411 agenda items and state notices scanned · 10 kept</span></div>
   </header>
@@ -99,7 +105,7 @@ td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
     <p>South Oxnard Connect Specific Plan goes to its hearing. Thirteen opportunity sites along the Saviers Road corridor would get more development capacity. Owners of those sites are the call list.</p>
   </div>
 
-  <section aria-labelledby="h-top">
+  <section class="zr-section" aria-labelledby="h-top">
     <h2 id="h-top">Worth a call this week <span class="count">5 items</span></h2>
 
     <article class="card">
@@ -180,7 +186,7 @@ td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
     </article>
   </section>
 
-  <section aria-labelledby="h-also">
+  <section class="zr-section" aria-labelledby="h-also">
     <h2 id="h-also">Also on the radar <span class="count">5 items</span></h2>
     <div class="tbl">
       <table>
@@ -196,12 +202,17 @@ td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
     </div>
   </section>
 
-  <footer class="coverage">
+  <div class="disclaimer">
     <p><strong>Covered in this prototype:</strong> Planning Commission, City Council and Board agendas for Thousand Oaks, Camarillo, Oxnard and the County of Ventura, plus state environmental notices (CEQAnet) for all of Ventura County and for Agoura Hills, Calabasas, Westlake Village and Hidden Hills. Camarillo had no qualifying items this period.</p>
     <p><strong>Not yet covered:</strong> agendas for Simi Valley, Ventura, Moorpark, Agoura Hills, Calabasas and Westlake Village; building permits; owner contact details.</p>
     <p>This is a snapshot of the week of November 5, 2026. Built from public records. Software picks and ranks the items, and AI writes the summaries. Check the linked source before acting. Outcomes of hearings are not confirmed unless a state notice was filed.</p>
-  <p><a href="../contact.html">Want a brief like this for your market? Let's talk →</a></p>
-  </footer>
+    <p><a href="../contact.html">Want a brief like this for your market? Let's talk →</a></p>
+  </div>
 </div>
+</div>
+</main>
 
+<section class="shell final-cta"><p class="eyebrow">YOUR NEXT STEP</p><h2>A clearer path starts<br>with a conversation.</h2><a class="button" href="../contact.html">Find your starting point ↗</a></section>
+<footer class="shell"><a class="brand" href="../index.html">✳ Social Gear AI</a><p>Your AI Sherpa. From first question to everyday progress.</p><div><a href="../services.html">Services</a><a href="../case-studies.html">Case studies</a><a href="../pricing.html">Pricing</a><a href="../trust.html">Data & trust</a><a href="../blog.html">Insights</a><a href="../contact.html">Contact</a></div><small>© 2026 Social Gear AI</small></footer>
+<script src="../site.js"></script>
 </body></html>
