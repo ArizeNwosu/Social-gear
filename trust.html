@@ -94,14 +94,16 @@
   }
   .flow-steps {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: stretch;
     gap: 0;
-    max-width: 600px;
+  }
+  @media (max-width: 768px) {
+    .flow-steps { flex-direction: column; }
   }
   .flow-step {
+    flex: 1;
     display: flex;
-    gap: 1.5rem;
-    align-items: flex-start;
   }
   .flow-step-card {
     background: #fffefa;
@@ -145,9 +147,13 @@
   .flow-arrow {
     font-size: 1.5rem;
     color: #d9ded1;
-    text-align: center;
-    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    padding: 0 0.75rem;
     font-weight: 300;
+  }
+  @media (max-width: 768px) {
+    .flow-arrow { justify-content: center; padding: 0.5rem 0; }
   }
 
   /* ── What we read / never do ── */
