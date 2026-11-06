@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/index.previous.html", "destination": "/", "permanent": true },
+    { "source": "/examples.html", "destination": "/case-studies.html", "permanent": true },
+    { "source": "/examples/manufacturing-radar.html", "destination": "/case-studies/manufacturing-radar.html", "permanent": true }
+  ]
+}

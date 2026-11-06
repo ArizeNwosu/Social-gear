@@ -1,0 +1,396 @@
+{
+  "categories": [
+    [
+      "sales",
+      "Sales and pipeline",
+      "Capture leads, qualify opportunities, and prepare proposals."
+    ],
+    [
+      "finance",
+      "Collections and cash",
+      "Prepare invoices, match payments, and flag overdue balances."
+    ],
+    [
+      "clients",
+      "Client retention and growth",
+      "Track renewals, onboarding, and the next useful conversation."
+    ],
+    [
+      "marketing",
+      "Marketing and reviews",
+      "Prepare content, organize campaigns, and respond to feedback."
+    ],
+    [
+      "operations",
+      "Operations and delivery",
+      "Coordinate schedules, documents, inventory, and project updates."
+    ],
+    [
+      "admin",
+      "Admin and back office",
+      "Turn meetings, forms, and documents into organized work."
+    ]
+  ],
+  "items": [
+    {
+      "id": "sales-1",
+      "category": "sales",
+      "title": "Route website leads",
+      "tools": "Forms \u2192 CRM",
+      "kind": "table",
+      "before": "A website inquiry waits to be copied into the CRM.",
+      "prepare": "Extract the contact, project, and requested service.",
+      "review": "Check the new record and assigned owner.",
+      "lines": [
+        "Contact \u00b7 Morgan Lee",
+        "Project \u00b7 Office refit",
+        "Owner \u00b7 Sales team"
+      ]
+    },
+    {
+      "id": "sales-2",
+      "category": "sales",
+      "title": "Prepare a proposal",
+      "tools": "CRM + documents",
+      "kind": "document",
+      "before": "A new proposal starts with a blank document.",
+      "prepare": "Draft a scope from the brief and approved service templates.",
+      "review": "Review scope, exclusions, and pricing before sharing.",
+      "lines": [
+        "Scope \u00b7 Reception redesign",
+        "Source \u00b7 Approved service template",
+        "Status \u00b7 Pricing needs review"
+      ]
+    },
+    {
+      "id": "sales-3",
+      "category": "sales",
+      "title": "Find relevant tenders",
+      "tools": "Web + documents",
+      "kind": "table",
+      "before": "Someone checks procurement portals one at a time.",
+      "prepare": "Collect opportunities and compare them with your criteria.",
+      "review": "Choose the opportunities worth pursuing.",
+      "lines": [
+        "Community centre \u00b7 Strong fit",
+        "Retail fit-out \u00b7 Check deadline",
+        "Regional campus \u00b7 Outside scope"
+      ]
+    },
+    {
+      "id": "sales-4",
+      "category": "sales",
+      "title": "Coordinate discovery calls",
+      "tools": "Forms + calendar",
+      "kind": "calendar",
+      "before": "The team compares calendars by hand.",
+      "prepare": "Find available slots and prepare an invitation.",
+      "review": "Confirm the time and invitation details.",
+      "lines": [
+        "Tuesday \u00b7 10:00 available",
+        "Wednesday \u00b7 14:00 available",
+        "Thursday \u00b7 11:30 available"
+      ]
+    },
+    {
+      "id": "finance-5",
+      "category": "finance",
+      "title": "Prepare invoices from completed work",
+      "tools": "Projects + accounting",
+      "kind": "document",
+      "before": "Completed jobs wait for someone to build the invoice.",
+      "prepare": "Match approved milestones with billing details.",
+      "review": "Check amounts and tax treatment before issuing.",
+      "lines": [
+        "Milestone \u00b7 Design approved",
+        "Reference \u00b7 Project 1042",
+        "Invoice \u00b7 Draft for finance"
+      ]
+    },
+    {
+      "id": "finance-6",
+      "category": "finance",
+      "title": "Match payments to invoices",
+      "tools": "Bank exports + accounting",
+      "kind": "table",
+      "before": "Payments and invoice records need manual comparison.",
+      "prepare": "Suggest matches and separate uncertain transactions.",
+      "review": "Confirm matches and investigate exceptions.",
+      "lines": [
+        "INV-1042 \u00b7 Match suggested",
+        "INV-1043 \u00b7 Partial payment",
+        "INV-1044 \u00b7 Needs review"
+      ]
+    },
+    {
+      "id": "finance-7",
+      "category": "finance",
+      "title": "Track overdue balances",
+      "tools": "Accounting + tasks",
+      "kind": "board",
+      "before": "An overdue balance gets lost in a spreadsheet.",
+      "prepare": "Group overdue invoices and prepare follow-up tasks.",
+      "review": "Review the account context before contacting clients.",
+      "lines": [
+        "Due \u00b7 3 invoices",
+        "Follow-up \u00b7 2 drafts",
+        "Disputed \u00b7 Human review"
+      ]
+    },
+    {
+      "id": "finance-8",
+      "category": "finance",
+      "title": "Build a cash collection report",
+      "tools": "Accounting + spreadsheets",
+      "kind": "chart",
+      "before": "The weekly collections report takes an afternoon.",
+      "prepare": "Compile aging balances and highlight changes.",
+      "review": "Verify the source totals before sharing the report.",
+      "lines": [
+        "Current \u00b7 62%",
+        "1\u201330 days \u00b7 28%",
+        "31+ days \u00b7 10%"
+      ]
+    },
+    {
+      "id": "clients-9",
+      "category": "clients",
+      "title": "Prepare renewal check-ins",
+      "tools": "CRM + contracts",
+      "kind": "calendar",
+      "before": "Contract dates live in scattered documents.",
+      "prepare": "Extract renewal dates and prepare check-in tasks.",
+      "review": "Choose the right timing and message for each client.",
+      "lines": [
+        "Atlas \u00b7 30 days to renewal",
+        "Birch \u00b7 Check-in drafted",
+        "Cedar \u00b7 Owner review"
+      ]
+    },
+    {
+      "id": "clients-10",
+      "category": "clients",
+      "title": "Coordinate client onboarding",
+      "tools": "Forms + project tools",
+      "kind": "board",
+      "before": "People chase the same intake details repeatedly.",
+      "prepare": "Organize submitted files and flag missing information.",
+      "review": "Confirm readiness before starting delivery.",
+      "lines": [
+        "Received \u00b7 Intake form",
+        "Missing \u00b7 Brand assets",
+        "Ready \u00b7 Kickoff checklist"
+      ]
+    },
+    {
+      "id": "clients-11",
+      "category": "clients",
+      "title": "Spot accounts needing attention",
+      "tools": "Support + CRM",
+      "kind": "chart",
+      "before": "Support patterns are hard to see across accounts.",
+      "prepare": "Summarize recurring issues and changes in activity.",
+      "review": "Decide which clients need a personal conversation.",
+      "lines": [
+        "Atlas \u00b7 Repeated delivery query",
+        "Birch \u00b7 Lower activity",
+        "Cedar \u00b7 No open issues"
+      ]
+    },
+    {
+      "id": "clients-12",
+      "category": "clients",
+      "title": "Prepare account review briefs",
+      "tools": "CRM + project history",
+      "kind": "document",
+      "before": "An account manager gathers context from several tools.",
+      "prepare": "Summarize recent work, feedback, and open commitments.",
+      "review": "Check the brief before the client meeting.",
+      "lines": [
+        "Delivered \u00b7 Website refresh",
+        "Open \u00b7 Training session",
+        "Discuss \u00b7 Next quarter priorities"
+      ]
+    },
+    {
+      "id": "marketing-13",
+      "category": "marketing",
+      "title": "Adapt content for each channel",
+      "tools": "Documents + publishing",
+      "kind": "board",
+      "before": "One useful idea is rewritten for every platform.",
+      "prepare": "Prepare channel-specific drafts from an approved source.",
+      "review": "Review the voice and facts before publication.",
+      "lines": [
+        "LinkedIn \u00b7 Draft ready",
+        "Newsletter \u00b7 Draft ready",
+        "Social caption \u00b7 Needs review"
+      ]
+    },
+    {
+      "id": "marketing-14",
+      "category": "marketing",
+      "title": "Prepare review responses",
+      "tools": "Review platforms + CRM",
+      "kind": "document",
+      "before": "Customer reviews wait for someone to reply.",
+      "prepare": "Draft a response using approved guidance and context.",
+      "review": "Approve public replies; handle sensitive cases personally.",
+      "lines": [
+        "Review \u00b7 Delivery feedback",
+        "Draft \u00b7 Thank you for sharing\u2026",
+        "Status \u00b7 Approval required"
+      ]
+    },
+    {
+      "id": "marketing-15",
+      "category": "marketing",
+      "title": "Build campaign reports",
+      "tools": "Analytics + spreadsheets",
+      "kind": "chart",
+      "before": "Someone copies figures from several dashboards.",
+      "prepare": "Combine campaign metrics and flag missing inputs.",
+      "review": "Validate attribution and numbers before drawing conclusions.",
+      "lines": [
+        "Website visits \u00b7 Sample 1,240",
+        "Enquiries \u00b7 Sample 38",
+        "Conversions \u00b7 Review attribution"
+      ]
+    },
+    {
+      "id": "marketing-16",
+      "category": "marketing",
+      "title": "Organize creative assets",
+      "tools": "Drive + content calendar",
+      "kind": "table",
+      "before": "Approved files are hard to find across folders.",
+      "prepare": "Suggest tags, names, and a calendar slot for each asset.",
+      "review": "Confirm rights, version, and publication timing.",
+      "lines": [
+        "Product photo \u00b7 Approved",
+        "Case study \u00b7 Edit requested",
+        "Campaign deck \u00b7 Current version"
+      ]
+    },
+    {
+      "id": "operations-17",
+      "category": "operations",
+      "title": "Schedule jobs and resources",
+      "tools": "Calendar + project tools",
+      "kind": "calendar",
+      "before": "Dispatch compares crew availability and job details.",
+      "prepare": "Suggest slots based on location, skills, and duration.",
+      "review": "Confirm the schedule before notifying the team.",
+      "lines": [
+        "Monday \u00b7 Site assessment",
+        "Tuesday \u00b7 Installation crew",
+        "Wednesday \u00b7 Buffer available"
+      ]
+    },
+    {
+      "id": "operations-18",
+      "category": "operations",
+      "title": "Extract information from PDFs",
+      "tools": "PDFs + spreadsheets",
+      "kind": "table",
+      "before": "Order details are copied from documents one field at a time.",
+      "prepare": "Extract quantities, dates, and references into a draft record.",
+      "review": "Check uncertain fields against the source document.",
+      "lines": [
+        "Order \u00b7 PO-2048",
+        "Quantity \u00b7 24 units",
+        "Delivery \u00b7 Date needs review"
+      ]
+    },
+    {
+      "id": "operations-19",
+      "category": "operations",
+      "title": "Flag inventory shortages",
+      "tools": "Inventory + purchasing",
+      "kind": "chart",
+      "before": "Low stock is discovered just before a job starts.",
+      "prepare": "Compare stock with upcoming demand and flag shortages.",
+      "review": "Review purchase suggestions before placing orders.",
+      "lines": [
+        "Cable \u00b7 Below threshold",
+        "Fittings \u00b7 Reorder suggested",
+        "Fixtures \u00b7 Enough for planned jobs"
+      ]
+    },
+    {
+      "id": "operations-20",
+      "category": "operations",
+      "title": "Prepare project status updates",
+      "tools": "Project tools + documents",
+      "kind": "board",
+      "before": "Project updates are scattered across notes and task boards.",
+      "prepare": "Compile milestones, blockers, and upcoming handoffs.",
+      "review": "Confirm the report before it reaches the client.",
+      "lines": [
+        "Complete \u00b7 Survey",
+        "Blocked \u00b7 Permit",
+        "Next \u00b7 Material delivery"
+      ]
+    },
+    {
+      "id": "admin-21",
+      "category": "admin",
+      "title": "Turn meeting notes into tasks",
+      "tools": "Transcripts + task tools",
+      "kind": "board",
+      "before": "Meeting decisions stay buried in a transcript.",
+      "prepare": "Extract actions, owners, and proposed due dates.",
+      "review": "Confirm commitments before creating assigned tasks.",
+      "lines": [
+        "Jordan \u00b7 Send revised brief",
+        "Casey \u00b7 Confirm timeline",
+        "Alex \u00b7 Review budget"
+      ]
+    },
+    {
+      "id": "admin-22",
+      "category": "admin",
+      "title": "Process supplier documents",
+      "tools": "PDFs + accounting",
+      "kind": "table",
+      "before": "Supplier bills need manual entry and checking.",
+      "prepare": "Extract bill details and compare against purchase orders.",
+      "review": "Approve exceptions and payment separately.",
+      "lines": [
+        "Supplier \u00b7 North Supply",
+        "PO \u00b7 2048 matched",
+        "Amount \u00b7 Finance review"
+      ]
+    },
+    {
+      "id": "admin-23",
+      "category": "admin",
+      "title": "Find answers in internal documents",
+      "tools": "Knowledge base + search",
+      "kind": "document",
+      "before": "People ask colleagues where the latest policy lives.",
+      "prepare": "Find relevant passages and draft an answer with sources.",
+      "review": "Check the cited source before acting on sensitive guidance.",
+      "lines": [
+        "Question \u00b7 Equipment requests",
+        "Source \u00b7 Team handbook \u00a74",
+        "Answer \u00b7 Draft with citation"
+      ]
+    },
+    {
+      "id": "admin-24",
+      "category": "admin",
+      "title": "Prepare team handovers",
+      "tools": "Projects + documents",
+      "kind": "document",
+      "before": "A handover depends on someone remembering every detail.",
+      "prepare": "Gather active work, deadlines, and unresolved decisions.",
+      "review": "Confirm ownership and context before handing over.",
+      "lines": [
+        "Active \u00b7 Client launch",
+        "Deadline \u00b7 Friday review",
+        "Decision \u00b7 Asset sign-off pending"
+      ]
+    }
+  ]
+}
