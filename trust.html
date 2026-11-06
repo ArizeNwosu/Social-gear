@@ -102,39 +102,12 @@
     display: flex;
     gap: 1.5rem;
     align-items: flex-start;
-    position: relative;
-  }
-  .flow-step:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    left: 19px;
-    top: 42px;
-    bottom: -1px;
-    width: 2px;
-    background: #d9ded1;
-  }
-  .flow-step-num {
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #f7f5ee;
-    border: 2px solid #244d3d;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Manrope', sans-serif;
-    font-weight: 800;
-    font-size: 0.875rem;
-    color: #244d3d;
-    z-index: 1;
   }
   .flow-step-card {
     background: #fffefa;
     border: 1px solid #d9ded1;
     border-radius: 10px;
     padding: 1.25rem 1.5rem;
-    margin-bottom: 1.25rem;
     flex: 1;
   }
   .flow-step-card strong {
@@ -151,6 +124,30 @@
     color: #687163;
     line-height: 1.55;
     margin: 0;
+  }
+  .flow-logos {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .flow-logos span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #687163;
+  }
+  .flow-brand-mark {
+    font-size: 1.1rem !important;
+    color: #244d3d !important;
+  }
+  .flow-arrow {
+    font-size: 1.5rem;
+    color: #d9ded1;
+    text-align: center;
+    padding: 0.5rem 0;
+    font-weight: 300;
   }
 
   /* ── What we read / never do ── */
@@ -268,38 +265,6 @@
     max-width: 540px;
   }
 
-  /* ── Video ── */
-  .video-section {
-    padding: 3.5rem 0;
-    border-top: 1px solid #d9ded1;
-  }
-  .video-wrapper {
-    position: relative;
-    max-width: 720px;
-    border-radius: 14px;
-    overflow: hidden;
-    border: 1px solid #d9ded1;
-    background: #0a0a0a;
-  }
-  .video-wrapper video {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-  .video-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    margin-top: 0.875rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: #687163;
-    letter-spacing: 0.03em;
-  }
-  .video-label svg {
-    opacity: 0.7;
-  }
 </style>
 </head><body><a class="skip" href="#main">Skip to content</a><header class="shell navigation"><a class="brand" href="index.html"><span>✳</span> Social Gear <b>AI</b></a><button class="menu" aria-expanded="false" aria-controls="navigation">Menu ☰</button><nav id="navigation"><a href="services.html">Services</a><a href="approach.html">Our approach</a><a href="case-studies.html">Case studies</a><a href="pricing.html">Pricing</a><a href="trust.html" aria-current="page">Trust</a><a class="button" href="contact.html">Let's talk ↗</a></nav></header>
 
@@ -355,31 +320,47 @@
     <div class="flow-steps">
 
       <div class="flow-step">
-        <div class="flow-step-num">1</div>
         <div class="flow-step-card">
+          <div class="flow-logos">
+            <svg width="21" height="21" viewBox="0 0 21 21" aria-label="Microsoft 365"><rect width="9.5" height="9.5" fill="#f25022"/><rect x="11.5" width="9.5" height="9.5" fill="#7fba00"/><rect y="11.5" width="9.5" height="9.5" fill="#00a4ef"/><rect x="11.5" y="11.5" width="9.5" height="9.5" fill="#ffb900"/></svg>
+            <span>Microsoft 365</span>
+            <svg width="21" height="21" viewBox="0 0 48 48" aria-label="Google Workspace"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#34A853" d="M10.53 28.59a14.5 14.5 0 0 1 0-9.18l-7.98-6.19a24.0 24.0 0 0 0 0 21.56l7.98-6.19z"/><path fill="#FBBC05" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+            <span>Google Workspace</span>
+          </div>
           <strong>Your inbox</strong>
           <p>Microsoft 365 or Google Workspace. You sign in there, so we never see your password.</p>
         </div>
       </div>
 
+      <div class="flow-arrow">→</div>
+
       <div class="flow-step">
-        <div class="flow-step-num">2</div>
         <div class="flow-step-card">
+          <div class="flow-logos">
+            <svg width="21" height="21" viewBox="0 0 24 24" aria-label="Pipedream"><path fill="#244d3d" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"/></svg>
+            <span>Pipedream</span>
+          </div>
           <strong>The secure connection</strong>
-          <p>Encrypted OAuth tokens. Revoke any time from your admin console.</p>
+          <p>Pipedream holds the key. Audited every year.</p>
         </div>
       </div>
 
+      <div class="flow-arrow">→</div>
+
       <div class="flow-step">
-        <div class="flow-step-num">3</div>
         <div class="flow-step-card">
+          <div class="flow-logos">
+            <span class="flow-brand-mark">✳</span>
+            <span>Social Gear AI</span>
+          </div>
           <strong>The audit</strong>
-          <p>We read the period of email you choose, and nothing outside it.</p>
+          <p>We read the year of email you choose, and nothing outside it.</p>
         </div>
       </div>
 
+      <div class="flow-arrow">→</div>
+
       <div class="flow-step">
-        <div class="flow-step-num">4</div>
         <div class="flow-step-card">
           <strong>Your map</strong>
           <p>You see it first. You choose who on your team sees it.</p>
@@ -439,18 +420,6 @@
     <p class="partners-note">Member of the Microsoft AI Cloud Partner Program. Google Workspace integration partner.</p>
   </section>
 
-  <!-- Video -->
-  <section class="shell video-section">
-    <p class="trust-section-label">See it in action</p>
-    <h2 class="trust-section-heading">Watch how it works</h2>
-    <div class="video-wrapper">
-      <video src="social-gear-video.mp4" controls muted playsinline preload="metadata"></video>
-    </div>
-    <p class="video-label">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-      Sound on
-    </p>
-  </section>
 
 </main>
 
