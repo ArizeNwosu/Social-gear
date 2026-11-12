@@ -20,5 +20,4 @@ First ask about my business, workflows, budget, existing tools, and data sensiti
  dialog.querySelector('#assessment-copy').onclick=copy;
  dialog.querySelectorAll('.assessment-providers a').forEach(a=>a.addEventListener('click',()=>{void copy()}));
  let dismissed=false;try{dismissed=sessionStorage.getItem('sg-assessment-dismissed')==='1'}catch{}
- const target=document.querySelector('.final-cta');if(target&&!dismissed){const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){observer.disconnect();if(!document.querySelector('dialog[open]')&&document.activeElement===document.body)dialog.showModal()}},{threshold:.25});observer.observe(target)}
 })();

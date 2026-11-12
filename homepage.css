@@ -82,6 +82,6 @@
 @media(max-width:800px){.homepage .final-cta{grid-template-columns:minmax(0,1fr);gap:28px;padding:28px}.homepage .next-video{justify-self:center}.homepage .home-motion svg{height:100px}}
 @media(prefers-reduced-motion:reduce){.homepage .home-motion *,.homepage .map-meter i{animation:none!important}.homepage .motion-replay{display:none}}
 /* Native portrait video, scaled to 25% of the original 430px frame width. */
-.homepage .next-video{max-width:108px;justify-self:center}
+.homepage .next-video{max-width:324px;justify-self:center}
 .homepage .next-video video{aspect-ratio:9/16;max-height:none;object-fit:cover}
 .homepage .next-video p{font-size:10px}

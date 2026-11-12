@@ -44,18 +44,7 @@
       render(el);if(!reduced.matches)play(el);
     }));
     reduced.addEventListener('change',()=>{if(reduced.matches)states.forEach((s,el)=>stop(el));});
-    const search=document.getElementById('automation-search');let filter='all';
-    function applyFilter(){
-      const terms=search.value.toLowerCase().trim().split(/\s+/).filter(Boolean);let count=0;
-      document.querySelectorAll('.library-card').forEach(card=>{
-        card.hidden=!(filter==='all'||card.dataset.libraryCategory===filter)||!terms.every(t=>card.dataset.search.includes(t));
-        if(!card.hidden)count++;else {const el=card.querySelector('[data-film]');stop(el);}
-      });
-      document.querySelectorAll('[data-group]').forEach(g=>g.hidden=![...g.querySelectorAll('.library-card')].some(c=>!c.hidden));
-      document.getElementById('library-count').textContent=`${count} workflow${count===1?'':'s'}`;
-      document.getElementById('library-empty').hidden=count!==0;
-    }
-    if(search){search.addEventListener('input',applyFilter);document.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;document.querySelectorAll('[data-filter]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));applyFilter();});}
+
   }).catch(()=>{
     document.querySelectorAll('.film-controls').forEach(el=>{el.innerHTML='<span>Demo unavailable. The workflow description is shown above.</span>';});
   });

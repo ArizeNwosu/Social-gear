@@ -1,0 +1,23 @@
+/* Interaction polish shared by the public site. */
+:root{--focus:#587a36;--ease:cubic-bezier(.2,.7,.2,1)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+[hidden]{display:none!important}
+.navigation nav a:not(.button){position:relative;padding-block:10px;transition:color .2s}
+.navigation nav a[aria-current]{color:#244d3d;font-weight:700}
+.navigation nav a[aria-current]:after{content:'';position:absolute;bottom:1px;left:0;right:0;height:2px;background:#789752;border-radius:2px}
+.button{transition:background .2s,transform .25s var(--ease),box-shadow .25s}
+.button:hover{transform:translateY(-2px);box-shadow:0 7px 18px #244d3d18}
+.button:active{transform:translateY(0)}
+button:disabled{cursor:not-allowed;opacity:.55}
+.home-example-grid article,.map-pricing li,.blog-feature-grid article,.library-card .automation-film{transition:transform .3s var(--ease),box-shadow .3s,border-color .3s}
+@media(hover:hover){.home-example-grid article:hover,.map-pricing li:hover{transform:translateY(-4px);box-shadow:0 14px 30px #244d3d0e}.library-card .automation-film:hover{border-color:#9aac84}.blog-entry h2 a:hover{color:#526e38}}
+.homepage .home-hero{position:relative}
+.homepage .home-hero:before{content:'';position:absolute;z-index:-1;inset:15% -8% 0 50%;background:radial-gradient(ellipse,#e7edcd88,transparent 70%);pointer-events:none}
+.homepage .wt-controls{flex-wrap:wrap;gap:10px}.hero-motion-toggle{font-size:11px;border:1px solid #c6d1b8;padding:7px 10px;background:#fffefa;border-radius:6px;color:#244d3d}
+.walkthrough-controls{display:flex;justify-content:center;gap:10px;margin-top:12px}.walkthrough-controls button{border:1px solid #c6d1b8;border-radius:6px;background:#fffefa;color:#244d3d;padding:10px 16px;font-size:12px}
+.modal-overlay[hidden]{display:none!important}.modal-box{max-height:calc(100dvh - 32px);overflow-y:auto}.modal-caption{min-height:2.5em}
+.article-search{padding:0 0 35px}.article-search label{font-size:13px;font-weight:700;display:block;margin-bottom:12px}.search-row{display:flex;gap:10px;max-width:720px}.search-row input{flex:1;min-width:0;border:1px solid #cdd7bf;border-radius:9px}.search-row button,.filter-reset{background:#fffefa;border:1px solid #cdd7bf;border-radius:7px;padding:11px 16px;color:#244d3d;font-size:12px}.filter-reset{margin-top:14px}.article-search p{font-size:12px;color:#687163}.blog-entry{transition:background .2s;padding-inline:18px;border-radius:8px}.blog-entry:hover{background:#eef1e4}.blog-entry h2 a{display:inline-block}.reading-progress{position:fixed;top:0;left:0;width:100%;height:3px;background:#65834e;transform-origin:left;z-index:80;pointer-events:none}
+.booking-status{padding:0 24px;font-size:14px;line-height:1.6;color:#526747}.booking-status:empty{display:none}.booking-status a{text-decoration:underline}.booking-form [role=alert]{font-size:14px;color:#923b2a;line-height:1.6}.booking-form [role=alert]:empty{display:none}.calendar-days .button{grid-column:1/-1;margin:20px 0}.booking-widget{scroll-margin-top:20px}.booking-step[hidden]{display:none!important}
+@media(max-width:1000px){.navigation{position:relative;z-index:25}.menu{display:block;border:1px solid #ccd7be;border-radius:7px;background:#fffefa;padding:10px 14px;color:#244d3d}.navigation nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:5px;padding:18px;background:#fffefa;border:1px solid #d9ded1;border-radius:0 0 12px 12px;box-shadow:0 18px 32px #244d3d18;max-height:calc(100dvh - 100px);overflow:auto}.navigation nav.open{display:flex}.navigation nav a{padding:11px 14px}.navigation nav .button{text-align:center}.navigation nav a[aria-current]:after{display:none}.navigation nav a[aria-current]{background:#eef3e3;border-radius:6px}footer div{position:static;flex-wrap:wrap;gap:14px 20px;margin-top:24px}}
+@media(max-width:600px){.search-row{flex-direction:column}.search-row button{align-self:flex-start}.blog-entry{padding-inline:0}.walkthrough-controls button{padding:10px 12px}.film-top{flex-wrap:wrap}.film-controls button{min-height:40px}.film-stage{grid-template-rows:minmax(180px,auto) 1fr}.screen-row{overflow-wrap:anywhere}.hero-motion-toggle{min-height:40px}.assessment-launch{max-width:calc(100vw - 32px)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}

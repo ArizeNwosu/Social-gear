@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Inbox Pulse · Social Gear AI</title><meta name="description" content="Case study by Social Gear AI: a one-page map of where an inbox's time goes, with sample data."><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f6f0"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#f7f6f0"><meta name="color-scheme" content="light"><title>Inbox Pulse · Social Gear AI</title><meta name="description" content="Case study by Social Gear AI: a one-page map of where an inbox's time goes, with sample data."><link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../sections.css">
 <link rel="stylesheet" href="../site.css">
@@ -75,7 +75,7 @@
   .trust-video-label{position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,0.6);color:#fff;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:4px;font-family:"IBM Plex Sans",sans-serif;pointer-events:none}
   .trust-video-caption{font-size:.78rem;color:var(--ink-faint);margin:.5rem 0 0;font-style:italic}
 </style>
-<link rel="stylesheet" href="../content.css">
+<link rel="stylesheet" href="../content.css"><link rel="stylesheet" href="../ui.css">
 <!-- SEO:START -->
 <link rel="canonical" href="https://www.social-gear.com/case-studies/inbox-pulse.html">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -87,7 +87,7 @@
 <meta name="twitter:card" content="summary">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Inbox Pulse · Social Gear AI", "description": "Case study by Social Gear AI: a one-page map of where an inbox's time goes, with sample data.", "url": "https://www.social-gear.com/case-studies/inbox-pulse.html"}</script>
 <!-- SEO:END -->
-</head><body>
+<link rel="stylesheet" href="../mobile.css"></head><body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="shell navigation"><a class="brand" href="/"><span>✳</span> Social Gear <b>AI</b></a><button class="menu" aria-expanded="false" aria-controls="navigation">Menu ☰</button><nav id="navigation"><a href="../automations.html">Automations</a><a href="../services.html">Services</a><a href="../approach.html">Our approach</a><a href="../case-studies.html">Case studies</a><a href="../pricing.html">Pricing</a><a href="../trust.html">Trust</a><a href="../blog.html">Blog</a><a class="button" href="../contact.html">Let's talk ↗</a></nav></header>
 <main id="main"><div class="wrap">
@@ -192,4 +192,4 @@
   const pEl=document.getElementById("pending");
   pending.forEach(([sev,who,what,age])=>{const row=document.createElement("div");row.className="pend-row";const tagLabel=sev==="high"?"Stalled":sev==="med"?"Open":"";row.innerHTML=`<div class="pend-dot ${sev}"></div><div><div class="pend-who">${who}${tagLabel?`<span class="tag ${sev}">${tagLabel}</span>`:""}</div><div class="pend-what">${what}</div></div><div class="pend-age">${age}</div>`;pEl.appendChild(row);});
 </script>
-<script src="../chat-motion.js"></script></body></html>
+<script src="../chat-motion.js"></script><script src="../ui.js"></script></body></html>

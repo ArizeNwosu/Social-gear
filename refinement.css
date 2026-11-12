@@ -61,7 +61,7 @@
 .modal-close{position:absolute;top:14px;right:18px;z-index:2;background:#fffefa;border:1px solid #dce1d4;border-radius:7px;padding:8px 16px;font:600 12px Manrope;color:#526747;cursor:pointer;transition:background .2s}.modal-close:hover{background:#edf0e7}
 .modal-viewport{position:relative;overflow:clip;flex:1;min-height:0}
 .modal-track{display:flex;height:100%;transition:transform .6s cubic-bezier(.4,0,.2,1)}
-.modal-slide{flex:0 0 100%;padding:48px 44px 36px;display:flex;flex-direction:column;overflow-y:auto;min-height:400px}
+.modal-slide{flex:0 0 100%;padding:48px 44px 36px;display:flex;flex-direction:column;overflow-y:auto}
 .modal-slide .ms-eyebrow{font:600 10px Manrope;letter-spacing:1.8px;text-transform:uppercase;color:#7a886b;margin:0 0 14px}
 .modal-slide .ms-title{font:600 28px/1.2 Manrope;letter-spacing:-1px;color:#203b30;margin:0 0 8px}
 .modal-slide .ms-sub{font-size:14px;color:#687163;line-height:1.65;margin:0 0 24px;max-width:520px}
