@@ -1,269 +1,68 @@
-/* Booking widget — Social Gear AI
-   Uses /api/availability and /api/book endpoints when available,
-   falls back to demo mode if the API isn't configured yet. */
-
-(function () {
-  var today = new Date();
-  today.setHours(0, 0, 0, 0);
-  var viewYear = today.getFullYear();
-  var viewMonth = today.getMonth();
-  var selectedDate = null;
-  var selectedTime = null;
-  var useApi = true; // Will fall back to demo if API returns error
-
-  var monthLabel = document.getElementById('cal-month-label');
-  var daysGrid = document.getElementById('cal-days');
-  var prevBtn = document.getElementById('cal-prev');
-  var nextBtn = document.getElementById('cal-next');
-  var tzLabel = document.getElementById('booking-tz');
-
-  var stepDate = document.getElementById('step-date');
-  var stepTime = document.getElementById('step-time');
-  var stepConfirm = document.getElementById('step-confirm');
-  var stepDone = document.getElementById('step-done');
-
-  // Show timezone
-  var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  tzLabel.textContent = 'Times shown in ' + tz.replace(/_/g, ' ');
-
-  var availability = {};
-
-  // --- API-backed availability ---
-  function fetchAvailabilityApi(year, month, callback) {
-    fetch('/api/availability?year=' + year + '&month=' + (month + 1))
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        if (data.error) throw new Error(data.error);
-        callback(data.available || {});
-      })
-      .catch(function () {
-        // API not configured — fall back to demo
-        useApi = false;
-        callback(fetchAvailabilityDemo(year, month));
-      });
+/* Confirm only bookings acknowledged by the live calendar API. */
+(() => {
+  const today=new Date(), initial=today.getFullYear()*12+today.getMonth();
+  let view=initial,availability={},date=null,time=null,timeZone='',request=0,submitting=false;
+  const $=id=>document.getElementById(id),grid=$('cal-days'),form=$('booking-form');
+  const status=document.createElement('p');status.id='booking-status';status.setAttribute('role','status');status.className='booking-status';$('booking-widget').prepend(status);
+  const error=document.createElement('p');error.setAttribute('role','alert');form.append(error);
+  function show(step){
+    ['date','time','confirm','done'].forEach(name=>$('step-'+name).hidden=name!==step);
+    const heading=$('step-'+step).querySelector('h2');heading.tabIndex=-1;heading.focus({preventScroll:true});
+    $('booking-widget').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
   }
-
-  // --- Demo fallback ---
-  function fetchAvailabilityDemo(year, month) {
-    var available = {};
-    var daysInMonth = new Date(year, month + 1, 0).getDate();
-    for (var d = 1; d <= daysInMonth; d++) {
-      var date = new Date(year, month, d);
-      var day = date.getDay();
-      if (day === 0 || day === 6) continue;
-      if (date < today) continue;
-      if (date.getTime() === today.getTime() && new Date().getHours() >= 15) continue;
-      var key = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
-      available[key] = generateDemoSlots(date);
-    }
-    return available;
-  }
-
-  function generateDemoSlots(date) {
-    var slots = [];
-    var startHour = 9;
-    if (date.getTime() === today.getTime()) {
-      startHour = Math.max(9, new Date().getHours() + 1);
-    }
-    for (var h = startHour; h < 16; h++) {
-      slots.push(formatTime(h, 0));
-      slots.push(formatTime(h, 30));
-    }
-    return slots;
-  }
-
-  function formatTime(h, m) {
-    var suffix = h >= 12 ? 'PM' : 'AM';
-    var hour = h > 12 ? h - 12 : h === 0 ? 12 : h;
-    return hour + ':' + String(m).padStart(2, '0') + ' ' + suffix;
-  }
-
-  // --- Calendar rendering ---
-  function renderCalendar() {
-    var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'];
-    monthLabel.textContent = monthNames[viewMonth] + ' ' + viewYear;
-    daysGrid.innerHTML = '<div class="booking-loading">Loading availability...</div>';
-    prevBtn.disabled = viewYear === today.getFullYear() && viewMonth === today.getMonth();
-
-    var render = function (avail) {
-      availability = avail;
-      var firstDay = new Date(viewYear, viewMonth, 1).getDay();
-      var daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
-
-      daysGrid.innerHTML = '';
-
-      for (var i = 0; i < firstDay; i++) {
-        var empty = document.createElement('span');
-        daysGrid.appendChild(empty);
+  function formatDate(value){return new Date(value+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});}
+  async function render(){
+    const token=++request,year=Math.floor(view/12),month=view%12;
+    $('cal-month-label').textContent=new Date(year,month,1).toLocaleDateString('en-US',{month:'long',year:'numeric'});
+    $('cal-prev').disabled=view<=initial;$('cal-next').disabled=view>=initial+12;
+    grid.textContent='Loading availability…';grid.setAttribute('aria-busy','true');status.textContent='';
+    try{
+      const response=await fetch(`/api/availability?year=${year}&month=${month+1}`);
+      if(!response.ok)throw Error();const data=await response.json();
+      if(!data.available||!data.timeZone)throw Error();if(token!==request)return;
+      availability=data.available;timeZone=data.timeZone;
+      $('booking-tz').textContent=`All times are in ${timeZone.replace(/_/g,' ')} (host timezone).`;
+      grid.replaceChildren();
+      for(let i=0;i<new Date(year,month,1).getDay();i++)grid.append(document.createElement('span'));
+      for(let day=1;day<=new Date(year,month+1,0).getDate();day++){
+        const key=`${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+        const button=document.createElement('button');button.type='button';button.className='calendar-day';button.textContent=day;button.setAttribute('aria-label',formatDate(key));
+        button.disabled=!availability[key]?.length;
+        if(!button.disabled){button.classList.add('calendar-day-available');button.onclick=()=>{date=key;time=null;renderTimes();show('time');};}
+        if(key===date){button.classList.add('calendar-day-selected');button.setAttribute('aria-pressed','true');}
+        grid.append(button);
       }
-
-      for (var d = 1; d <= daysInMonth; d++) {
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'calendar-day';
-        btn.textContent = d;
-
-        var date = new Date(viewYear, viewMonth, d);
-        var key = viewYear + '-' + String(viewMonth + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
-
-        if (date < today) {
-          btn.disabled = true;
-        } else if (availability[key]) {
-          btn.classList.add('calendar-day-available');
-          btn.dataset.date = key;
-          btn.onclick = selectDate;
-        } else {
-          btn.disabled = true;
-        }
-
-        if (date.getTime() === today.getTime()) {
-          btn.classList.add('calendar-day-today');
-        }
-
-        if (selectedDate === key) {
-          btn.classList.add('calendar-day-selected');
-        }
-
-        daysGrid.appendChild(btn);
-      }
-    };
-
-    if (useApi) {
-      fetchAvailabilityApi(viewYear, viewMonth, render);
-    } else {
-      render(fetchAvailabilityDemo(viewYear, viewMonth));
+      if(!Object.values(availability).some(slots=>slots.length))status.textContent='No appointments this month. Try another month or contact us.';
+    }catch{
+      if(token!==request)return;availability={};grid.replaceChildren();
+      const retry=document.createElement('button');retry.type='button';retry.className='button';retry.textContent='Retry availability';retry.onclick=render;grid.append(retry);
+      status.replaceChildren(document.createTextNode('Online scheduling is unavailable. '));const link=document.createElement('a');link.href='contact.html';link.textContent='Contact us to arrange a time →';status.append(link);
+      $('booking-tz').textContent='No appointment has been booked.';
+    }finally{if(token===request)grid.removeAttribute('aria-busy');}
+  }
+  function renderTimes(){
+    $('selected-date-label').textContent=`${formatDate(date)} · ${timeZone.replace(/_/g,' ')}`;
+    $('time-slots').replaceChildren();
+    for(const value of availability[date]||[]){
+      const button=document.createElement('button');button.type='button';button.className='time-slot';button.textContent=value;
+      button.onclick=()=>{time=value;$('summary-date').textContent=formatDate(date);$('summary-time').textContent=`${time} · 30 minutes · ${timeZone.replace(/_/g,' ')}`;error.textContent='';show('confirm');};$('time-slots').append(button);
     }
   }
-
-  function selectDate(e) {
-    selectedDate = e.currentTarget.dataset.date;
-    selectedTime = null;
-    renderCalendar();
-    showStep('time');
-    renderTimeSlots();
-  }
-
-  function renderTimeSlots() {
-    var container = document.getElementById('time-slots');
-    var label = document.getElementById('selected-date-label');
-
-    var parts = selectedDate.split('-');
-    var d = new Date(parts[0], parts[1] - 1, parts[2]);
-    label.textContent = d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
-
-    var slots = availability[selectedDate] || [];
-    container.innerHTML = '';
-
-    slots.forEach(function (time) {
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'time-slot';
-      btn.textContent = time;
-      if (time === selectedTime) btn.classList.add('time-slot-selected');
-      btn.onclick = function () {
-        selectedTime = time;
-        showStep('confirm');
-        populateSummary();
-      };
-      container.appendChild(btn);
-    });
-  }
-
-  function populateSummary() {
-    var parts = selectedDate.split('-');
-    var d = new Date(parts[0], parts[1] - 1, parts[2]);
-    var dateStr = d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
-    document.getElementById('summary-date').textContent = dateStr;
-    document.getElementById('summary-time').textContent = selectedTime + ' · 30 minutes';
-  }
-
-  function showStep(step) {
-    stepDate.hidden = step !== 'date';
-    stepTime.hidden = step !== 'time';
-    stepConfirm.hidden = step !== 'confirm';
-    stepDone.hidden = step !== 'done';
-    // Scroll widget into view on step change
-    document.getElementById('booking-widget').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  // Navigation
-  prevBtn.onclick = function () {
-    viewMonth--;
-    if (viewMonth < 0) { viewMonth = 11; viewYear--; }
-    renderCalendar();
+  $('cal-prev').onclick=()=>{if(view>initial){view--;render();}};
+  $('cal-next').onclick=()=>{if(view<initial+12){view++;render();}};
+  $('back-to-date').onclick=()=>{show('date');render();};
+  $('back-to-time').onclick=()=>{show('time');renderTimes();};
+  form.onsubmit=async event=>{
+    event.preventDefault();if(submitting||!date||!time||!form.reportValidity())return;
+    submitting=true;const button=form.querySelector('[type=submit]');button.disabled=true;button.textContent='Confirming…';error.textContent='';
+    const payload=Object.fromEntries(new FormData(form));payload.date=date;payload.time=time;
+    try{
+      const response=await fetch('/api/book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      const result=await response.json();
+      if(!response.ok||!result.success||!result.eventId)throw Error(result.error||'We could not confirm your booking. Please contact us before retrying.');
+      $('done-summary').textContent=`${formatDate(date)} at ${time} · ${timeZone.replace(/_/g,' ')}`;$('done-email').textContent=payload.email;show('done');
+    }catch(err){error.textContent=err.message==='Failed to fetch'?'Connection lost. Your booking is not confirmed here; please contact us before retrying.':err.message;}
+    finally{submitting=false;button.disabled=false;button.textContent='Confirm booking →';}
   };
-  nextBtn.onclick = function () {
-    viewMonth++;
-    if (viewMonth > 11) { viewMonth = 0; viewYear++; }
-    renderCalendar();
-  };
-
-  // Back buttons
-  document.getElementById('back-to-date').onclick = function () {
-    showStep('date');
-    renderCalendar();
-  };
-  document.getElementById('back-to-time').onclick = function () {
-    showStep('time');
-    renderTimeSlots();
-  };
-
-  // Form submission
-  document.getElementById('booking-form').onsubmit = function (e) {
-    e.preventDefault();
-    var form = e.target;
-    var data = {
-      name: form.name.value,
-      email: form.email.value,
-      company: form.company.value,
-      notes: form.notes.value,
-      date: selectedDate,
-      time: selectedTime
-    };
-    submitBooking(data);
-  };
-
-  function submitBooking(data) {
-    var submitBtn = document.querySelector('.booking-submit');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Booking...';
-
-    if (useApi) {
-      fetch('/api/book', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      })
-        .then(function (r) { return r.json(); })
-        .then(function (result) {
-          if (result.error) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Confirm booking →';
-            alert(result.error);
-            return;
-          }
-          showConfirmation(data);
-        })
-        .catch(function () {
-          // Fall back to demo confirmation
-          showConfirmation(data);
-        });
-    } else {
-      // Demo mode
-      setTimeout(function () { showConfirmation(data); }, 1200);
-    }
-  }
-
-  function showConfirmation(data) {
-    var parts = selectedDate.split('-');
-    var d = new Date(parts[0], parts[1] - 1, parts[2]);
-    var dateStr = d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-    document.getElementById('done-summary').textContent = dateStr + ' at ' + selectedTime;
-    document.getElementById('done-email').textContent = data.email;
-    showStep('done');
-  }
-
-  // Init
-  renderCalendar();
+  render();
 })();
