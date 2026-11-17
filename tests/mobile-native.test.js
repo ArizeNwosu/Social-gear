@@ -55,3 +55,8 @@ test('every page footer presents both partner badges together',()=>{
   assert.deepEqual(failures,[]);
   assert.ok(fs.existsSync(path.join(root,'microsoft-partner.png')));
 });
+
+test('homepage hero presents Microsoft beside OpenAI',()=>{
+  const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+  assert.match(html,/class="hero-partners[^"]*"[\s\S]*openai-badge\.svg[\s\S]*microsoft-partner\.png/);
+});
