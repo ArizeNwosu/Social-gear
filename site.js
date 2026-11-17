@@ -1,5 +1,11 @@
 const menu=document.querySelector('.menu'),navigation=document.getElementById('navigation');
 if(menu&&navigation){
+ navigation.setAttribute('aria-label','Primary');
+ const currentPath=location.pathname.replace(/\/$/,'/index.html');
+ navigation.querySelectorAll('a[href]').forEach(link=>{
+  const linkPath=new URL(link.href,location.href).pathname.replace(/\/$/,'/index.html');
+  if(linkPath===currentPath)link.setAttribute('aria-current','page');
+ });
  const setMenuState=open=>{navigation.classList.toggle('open',open);document.body.classList.toggle('menu-open',open);menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Close navigation':'Open navigation');menu.textContent=open?'Close ×':'Menu ☰';};
  const closeMenu=()=>setMenuState(false);
  setMenuState(false);

@@ -7,7 +7,7 @@ const root=path.resolve(__dirname,'..');
 
 function htmlFiles(dir=root){
   return fs.readdirSync(dir,{withFileTypes:true}).flatMap(entry=>{
-    if(entry.name==='.git'||entry.name==='node_modules')return [];
+    if(entry.name==='.git'||entry.name==='.worktrees'||entry.name==='node_modules')return [];
     const target=path.join(dir,entry.name);
     return entry.isDirectory()?htmlFiles(target):entry.name.endsWith('.html')?[target]:[];
   });
@@ -41,4 +41,17 @@ test('mobile layer keeps zoom, touch, hover, and safe-area behavior native',()=>
   assert.match(css,/@media \(hover: none\), \(pointer: coarse\)/);
   assert.match(css,/env\(safe-area-inset-bottom/);
   assert.match(css,/100dvh/);
+});
+
+test('every page footer presents both partner badges together',()=>{
+  const failures=[];
+  for(const file of htmlFiles()){
+    const html=fs.readFileSync(file,'utf8');
+    if(!/<footer\b/.test(html))continue;
+    if(!/class="footer-partners"/.test(html)||!/openai-badge\.svg/.test(html)||!/microsoft-partner\.png/.test(html)){
+      failures.push(path.relative(root,file));
+    }
+  }
+  assert.deepEqual(failures,[]);
+  assert.ok(fs.existsSync(path.join(root,'microsoft-partner.png')));
 });
