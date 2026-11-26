@@ -1,0 +1,144 @@
+{
+ "id": "more-money-more-music",
+ "title": "Website Services Agreement",
+ "subtitle": "More Money More Music, Phase 1",
+ "provider": {
+  "company": "Social Gear Media LLC",
+  "email": "riz@social-gear.com"
+ },
+ "clientLabel": "Client",
+ "blocks": [
+  {
+   "t": "p",
+   "x": "This agreement is between **Social Gear Media LLC** (\"Social Gear\"), 741 Lakefield Road, Suite G, Thousand Oaks, CA 91361, and **Angela Michael** (\"Client\"), Los Angeles, CA. It starts on the date of the last signature below."
+  },
+  {
+   "t": "h",
+   "x": "1. The project"
+  },
+  {
+   "t": "p",
+   "x": "Social Gear will build the Phase 1 landing page for More Money More Music at moremoneymoremusic.com (the \"Website\")."
+  },
+  {
+   "t": "p",
+   "x": "**Included in the build**"
+  },
+  {
+   "t": "ul",
+   "items": [
+    "One landing page, designed around the Client's logo, with page copy",
+    "An edit of the video footage that the Client provides, with captions",
+    "Klaviyo setup: sign-up form, thank-you page and one automatic welcome email",
+    "Domain connection, SSL, sending-domain authentication and visitor tracking",
+    "Two rounds of revisions"
+   ]
+  },
+  {
+   "t": "p",
+   "x": "**Not included:** logo or brand design, filming, a lead magnet, newsletter writing, paid advertising, social media management, the course content, and any later phase (sales page, checkout, member platform). Social Gear will quote any added work in writing before it starts."
+  },
+  {
+   "t": "p",
+   "x": "**Timeline.** The target is to go live 10 days after Social Gear receives the Client's logo, photos, credits and video footage. This is a target, not a guarantee. Late materials or late approvals move the date."
+  },
+  {
+   "t": "h",
+   "x": "2. Fees and payment"
+  },
+  {
+   "t": "ul",
+   "items": [
+    "**Build fee:** $1,500, one time, due before work starts.",
+    "**Management plan:** $150 per month, billed monthly in advance, starting on the day the Website goes live. This fee is for Social Gear's services. It does not include third-party fees.",
+    "**Third-party accounts:** the Client creates, owns and pays for the Vercel hosting account, the Klaviyo account and the domain registration. This keeps ownership and control of all accounts with the Client.",
+    "**Hosting cost:** the Website is hosted on the Vercel Pro plan, currently $20 per month, billed to the Client by Vercel. Later phases (sales page, member platform) can need more capacity at a higher cost.",
+    "**Email platform cost:** Klaviyo is free within its free-plan limits, currently 250 contacts, and is paid above them.",
+    "**Price changes:** third-party prices are set by those providers and can change."
+   ]
+  },
+  {
+   "t": "p",
+   "x": "The management plan covers hosting management, DNS and SSL, security and firewall settings, spam filtering, backups, uptime monitoring, updates, up to one hour of small edits per month, and a monthly report. Unused edit time does not carry over."
+  },
+  {
+   "t": "h",
+   "x": "3. Ownership"
+  },
+  {
+   "t": "p",
+   "x": "When the build fee is paid in full, the Client owns the Website, its custom design, its files and all content."
+  },
+  {
+   "t": "p",
+   "x": "Two items are outside that transfer:"
+  },
+  {
+   "t": "ul",
+   "items": [
+    "**Third-party services** (for example Vercel, Klaviyo and a video host) stay under their own terms. The Client holds those accounts.",
+    "**Social Gear's own tools**, methods and reusable code that existed before this project stay with Social Gear. The Client receives a permanent, free license to use any of them that are part of the Website."
+   ]
+  },
+  {
+   "t": "p",
+   "x": "The Client owns the email subscriber list and all customer data at all times."
+  },
+  {
+   "t": "h",
+   "x": "4. Accounts and access"
+  },
+  {
+   "t": "ul",
+   "items": [
+    "The domain moremoneymoremusic.com is registered in the Client's name.",
+    "The Vercel hosting account and the Klaviyo account are created and owned by the Client.",
+    "The Client holds full administrative access to all three at all times.",
+    "The Client gives Social Gear the access that it needs to do the work, and can remove that access when this agreement ends."
+   ]
+  },
+  {
+   "t": "h",
+   "x": "5. Cancellation"
+  },
+  {
+   "t": "p",
+   "x": "The management plan runs month to month. Either party can cancel it with 30 days' written notice, by email. There is no cancellation fee or penalty. Fees are due through the end of the notice period."
+  },
+  {
+   "t": "p",
+   "x": "After cancellation, the Website stays the Client's and stays live, as long as the Client keeps the hosting, domain and other subscriptions active and paid. Social Gear's monitoring, updates and edits stop on the last day of the notice period."
+  },
+  {
+   "t": "h",
+   "x": "6. Transfer and handover"
+  },
+  {
+   "t": "ul",
+   "items": [
+    "The Website is built as standard web files, with no proprietary platform. It can move to another host or provider.",
+    "On request, Social Gear gives the Client all transferable Website files and the latest backup, within 5 business days, at no charge. There are no transfer or release fees.",
+    "If the Client wants Social Gear to do the move to a new provider, Social Gear will quote that work in writing first.",
+    "Social Gear is not responsible for how the Website performs on another provider's systems after a move.",
+    "Before the Client approves any later phase, Social Gear will state in writing any platform limits that could affect a future transfer."
+   ]
+  },
+  {
+   "t": "h",
+   "x": "7. General terms"
+  },
+  {
+   "t": "ul",
+   "items": [
+    "**Client materials.** The Client confirms that she has the right to use the logo, photos, video, credits and other materials that she provides.",
+    "**No guarantee of results.** Social Gear does not guarantee a number of visitors, subscribers or sales.",
+    "**Limit of liability.** Each party's total liability under this agreement is limited to the fees that the Client paid in the 6 months before the claim.",
+    "**Independent contractor.** Social Gear works as an independent contractor, not as an employee or partner of the Client.",
+    "**Changes.** Changes to this agreement must be in writing and accepted by both parties. Email is sufficient.",
+    "**Governing law.** California law applies.",
+    "**Entire agreement.** This document is the full agreement for Phase 1. The Launch Blueprint describes the plan. If the two conflict, this agreement controls.",
+    "**Electronic signatures.** The parties agree to sign this agreement electronically. An electronic signature has the same effect as a handwritten signature."
+   ]
+  }
+ ]
+}
