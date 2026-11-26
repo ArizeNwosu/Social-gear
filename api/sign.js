@@ -1,5 +1,5 @@
 const agreements = require('../lib/agreements');
-const { docHash, makeToken, readToken, sameKey, stamp, buildPdf } = require('../lib/sign-utils');
+const { docHash, makeToken, readToken, sameKey, stamp, buildPdf, readStrokes } = require('../lib/sign-utils');
 const { sendMail } = require('../lib/sign-mail');
 
 const EMAIL = /^[^\s@<>,;"]+@[^\s@<>,;"]+\.[^\s@<>,;"]+$/;
@@ -33,7 +33,8 @@ module.exports = async function handler(req, res) {
       if (!sameKey(src.key)) return res.status(403).json({ error: 'The signing key is not correct.' });
       if (!str(src.name, 120) || !str(src.title, 120) || !str(src.clientName, 120) || !str(src.clientEmail, 254) || !EMAIL.test(src.clientEmail.trim()))
         return res.status(400).json({ error: 'Check your name, your title, and the client name and email.' });
-      const token = makeToken({ id: agreement.id, h: hash, pn: src.name.trim(), pt: src.title.trim(), ps: new Date().toISOString(), pip: ip(req), cn: src.clientName.trim(), ce: src.clientEmail.trim() });
+      if (src.signature != null && !readStrokes(src.signature)) return res.status(400).json({ error: 'The drawn signature could not be read. Clear it and draw it again.' });
+      const token = makeToken({ id: agreement.id, h: hash, pg: src.signature || undefined, pn: src.name.trim(), pt: src.title.trim(), ps: new Date().toISOString(), pip: ip(req), cn: src.clientName.trim(), ce: src.clientEmail.trim() });
       const link = `${site()}/proposals/${agreement.id}/agreement.html?t=${token}`;
       await sendMail({ to: [src.clientEmail.trim()], cc: [agreement.provider.email], replyTo: agreement.provider.email, subject: `Please sign: ${agreement.title} - ${agreement.subtitle}`,
         text: `Hi ${src.clientName.trim()},\n\n${src.name.trim()} of ${agreement.provider.company} signed the ${agreement.title} (${agreement.subtitle}).\n\nPlease read it and sign it here:\n${link}\n\nWhen you sign, both of us get the completed copy by email as a PDF. This link works for 30 days.\n\n${src.name.trim()}\n${agreement.provider.company}` });
@@ -52,7 +53,7 @@ module.exports = async function handler(req, res) {
         image = Buffer.from(m[1], 'base64');
         if (image.length < 200 || image.readUInt32BE(0) !== 0x89504e47) return res.status(400).json({ error: 'The drawn signature could not be read. Clear it and draw it again.' });
       }
-      const provider = { name: t.pn, title: t.pt, email: agreement.provider.email, at: t.ps, ip: t.pip };
+      const provider = { name: t.pn, title: t.pt, email: agreement.provider.email, at: t.ps, ip: t.pip, strokes: t.pg ? readStrokes(t.pg) : null };
       const client = { name: src.name.trim(), title: '', email: t.ce, at: new Date().toISOString(), ip: ip(req), image };
       const pdf = await buildPdf(agreement, provider, client, hash);
       await sendMail({ to: [t.ce, agreement.provider.email], replyTo: agreement.provider.email, subject: `Signed: ${agreement.title} - ${agreement.subtitle}`,
