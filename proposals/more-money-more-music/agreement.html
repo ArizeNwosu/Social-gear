@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Website Services Agreement — More Money More Music | Social Gear</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{--ink:#1B1712;--cream:#FAF6EC;--card:#F1EADB;--gold:#E8B11C;--golddk:#7A5900;--line:#DDD2BA;--bad:#9B1C1C;--ok:#1F5132}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'DM Sans',Arial,sans-serif;font-size:17px;line-height:1.6;-webkit-text-size-adjust:100%}
+a{color:var(--golddk)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 24px;border-bottom:1px solid var(--line);font-size:15px}
+.top a{text-decoration:none;color:var(--ink);font-weight:700}
+.top .mark{color:var(--golddk)}
+.wrap{max-width:780px;margin:0 auto;padding:40px 24px 80px}
+h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:clamp(36px,7vw,56px);line-height:1.05;margin:0 0 8px}
+.sub{color:#4A4338;margin:0 0 32px}
+h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:28px;line-height:1.15;margin:40px 0 12px}
+p{margin:0 0 14px}
+ul{padding-left:1.3em;margin:0 0 18px}
+li{margin:0 0 8px}
+.panel{background:var(--card);border-radius:16px;padding:24px;margin-top:40px;border-top:4px solid var(--gold)}
+.panel h2{margin-top:0}
+label{display:block;font-weight:700;font-size:15px;margin:16px 0 6px}
+input[type=text],input[type=email],input[type=password]{width:100%;font:inherit;padding:12px 14px;border:2px solid #CFC4AC;border-radius:10px;background:#FFFDF7;color:var(--ink)}
+input:focus-visible,button:focus-visible,canvas:focus-visible{outline:3px solid var(--golddk);outline-offset:2px}
+.pad{position:relative;margin-top:6px}
+canvas{display:block;width:100%;height:180px;background:#FFFDF7;border:2px dashed #CFC4AC;border-radius:10px;touch-action:none;cursor:crosshair}
+.padhint{font-size:14px;color:#4A4338;margin:6px 0 0;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.link{background:none;border:none;font:inherit;font-size:14px;color:var(--golddk);text-decoration:underline;cursor:pointer;padding:6px 0}
+.check{display:flex;gap:12px;align-items:flex-start;font-weight:400;margin-top:20px}
+.check input{width:22px;height:22px;margin-top:3px;flex:none}
+.btn{display:block;width:100%;margin-top:20px;background:var(--gold);color:var(--ink);font:inherit;font-weight:700;border:none;border-radius:999px;padding:16px 26px;cursor:pointer}
+.btn[disabled]{opacity:.6;cursor:wait}
+.msg{margin:16px 0 0;font-weight:500}
+.msg.bad{color:var(--bad)}
+.msg.ok{color:var(--ok)}
+.done{background:#E3F0E6;border-top-color:var(--ok)}
+.signedby{background:#FFFDF7;border-radius:10px;padding:12px 16px;margin:0 0 8px;font-size:15px}
+.small{font-size:13px;color:#4A4338;word-break:break-all}
+[hidden]{display:none!important}
+@media print{.top,.panel{display:none}}
+</style>
+</head>
+<body>
+<div class="top"><a href="https://social-gear.com"><span class="mark">✳</span> Social Gear</a><a href="blueprint.html">View the blueprint →</a></div>
+<main class="wrap">
+  <h1 id="title">Website Services Agreement</h1>
+  <p class="sub" id="subtitle">More Money More Music, Phase 1</p>
+  <div id="doc" aria-live="polite"><p>Loading the agreement…</p></div>
+
+  <section class="panel" id="clientPanel" hidden>
+    <h2>Sign the agreement</h2>
+    <p class="signedby" id="signedby"></p>
+    <form id="clientForm" novalidate>
+      <label for="cName">Your full legal name</label>
+      <input type="text" id="cName" autocomplete="name" maxlength="120" required>
+      <label for="pad">Draw your signature</label>
+      <div class="pad"><canvas id="pad" width="1200" height="360" tabindex="0" aria-label="Signature area. Draw with your finger or mouse. If you leave it empty, your typed name is used as your signature."></canvas></div>
+      <p class="padhint"><span>Use your finger or mouse. If you leave this empty, your typed name is your signature.</span><button type="button" class="link" id="clear">Clear</button></p>
+      <label class="check"><input type="checkbox" id="cConsent"><span>I have read this agreement. I agree to its terms, and I agree to sign it electronically.</span></label>
+      <button class="btn" type="submit">Sign agreement</button>
+      <p class="msg" id="cMsg" role="status"></p>
+    </form>
+  </section>
+
+  <section class="panel" id="providerPanel" hidden>
+    <h2>Social Gear signs first</h2>
+    <p>This step is for Social Gear. When you sign, the client gets an email with a private link to sign.</p>
+    <form id="providerForm" novalidate>
+      <label for="pName">Your full name</label>
+      <input type="text" id="pName" autocomplete="name" maxlength="120" required>
+      <label for="pTitle">Your title</label>
+      <input type="text" id="pTitle" maxlength="120" value="Founder" required>
+      <label for="kName">Client full name</label>
+      <input type="text" id="kName" maxlength="120" required>
+      <label for="kEmail">Client email</label>
+      <input type="email" id="kEmail" autocomplete="off" maxlength="254" required>
+      <label for="pKey">Signing key</label>
+      <input type="password" id="pKey" autocomplete="off" required>
+      <label class="check"><input type="checkbox" id="pConsent"><span>I sign this agreement for Social Gear Media LLC, and I agree to sign it electronically. My typed name is my signature.</span></label>
+      <button class="btn" type="submit">Sign and send to client</button>
+      <p class="msg" id="pMsg" role="status"></p>
+    </form>
+  </section>
+
+  <section class="panel done" id="donePanel" hidden>
+    <h2 id="doneTitle"></h2>
+    <p id="doneText"></p>
+    <p class="small" id="doneLink"></p>
+  </section>
+  <p class="small" id="docId" style="margin-top:32px"></p>
+</main>
+<script>
+(function(){
+  var ID='more-money-more-music', token=new URLSearchParams(location.search).get('t'), hash=null;
+  function $(id){return document.getElementById(id);}
+  function el(tag,text){var e=document.createElement(tag);if(text!=null)rich(e,text);return e;}
+  // Renders **bold** runs as <strong> with text nodes only, so agreement text is never parsed as HTML.
+  function rich(node,text){text.split('**').forEach(function(part,i){if(!part)return;if(i%2){var s=document.createElement('strong');s.textContent=part;node.appendChild(s);}else node.appendChild(document.createTextNode(part));});}
+  function say(id,text,kind){var m=$(id);m.textContent=text;m.className='msg '+(kind||'');}
+  function post(body){return fetch('/api/sign',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(!r.ok)throw new Error(j.error||'Something went wrong. Please try again.');return j;});});}
+  function done(title,text,link){['clientPanel','providerPanel'].forEach(function(p){$(p).hidden=true;});$('doneTitle').textContent=title;$('doneText').textContent=text;$('doneLink').textContent=link||'';$('donePanel').hidden=false;$('donePanel').scrollIntoView({behavior:'smooth'});}
+
+  fetch('/api/sign?id='+ID+(token?'&t='+encodeURIComponent(token):'')).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||'The agreement could not be loaded.');return j;});}).then(function(d){
+    hash=d.hash;$('title').textContent=d.title;$('subtitle').textContent=d.subtitle;
+    var doc=$('doc');doc.textContent='';
+    d.blocks.forEach(function(b){
+      if(b.t==='h')doc.appendChild(el('h2',b.x));
+      else if(b.t==='ul'){var ul=document.createElement('ul');b.items.forEach(function(i){ul.appendChild(el('li',i));});doc.appendChild(ul);}
+      else doc.appendChild(el('p',b.x));
+    });
+    $('docId').textContent='Document ID: '+d.hash;
+    if(d.signing){
+      $('signedby').textContent='Signed for '+d.company+' by '+d.signing.providerName+', '+d.signing.providerTitle+', on '+d.signing.providerSigned+'. The completed copy goes to '+d.signing.clientEmail+'.';
+      $('cName').value=d.signing.clientName;$('clientPanel').hidden=false;
+    }else $('providerPanel').hidden=false;
+  }).catch(function(e){$('doc').textContent=e.message;});
+
+  // Signature pad
+  var pad=$('pad'),ctx=pad.getContext('2d'),drawing=false,inked=false,last=null;
+  ctx.lineWidth=5;ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#0D1A59';
+  function at(e){var r=pad.getBoundingClientRect();return {x:(e.clientX-r.left)*pad.width/r.width,y:(e.clientY-r.top)*pad.height/r.height};}
+  pad.addEventListener('pointerdown',function(e){drawing=true;last=at(e);pad.setPointerCapture(e.pointerId);ctx.beginPath();ctx.arc(last.x,last.y,2.5,0,6.3);ctx.fillStyle='#0D1A59';ctx.fill();inked=true;e.preventDefault();});
+  pad.addEventListener('pointermove',function(e){if(!drawing)return;var p=at(e);ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.stroke();last=p;e.preventDefault();});
+  ['pointerup','pointercancel'].forEach(function(n){pad.addEventListener(n,function(){drawing=false;});});
+  $('clear').addEventListener('click',function(){ctx.clearRect(0,0,pad.width,pad.height);inked=false;});
+
+  $('clientForm').addEventListener('submit',function(e){
+    e.preventDefault();var btn=e.target.querySelector('.btn'),name=$('cName').value.trim();
+    if(!name)return say('cMsg','Type your full legal name.','bad');
+    if(!$('cConsent').checked)return say('cMsg','Tick the box to confirm that you agree.','bad');
+    btn.disabled=true;say('cMsg','Signing…');
+    post({id:ID,step:'client',t:token,hash:hash,name:name,consent:true,signature:inked?pad.toDataURL('image/png'):null}).then(function(j){
+      done('Signed. Thank you.','You signed on '+j.signedAt+'. The completed agreement is on its way to you and to Social Gear by email, as a PDF.');
+    }).catch(function(err){btn.disabled=false;say('cMsg',err.message,'bad');});
+  });
+  $('providerForm').addEventListener('submit',function(e){
+    e.preventDefault();var btn=e.target.querySelector('.btn');
+    if(!$('pName').value.trim()||!$('pTitle').value.trim()||!$('kName').value.trim()||!$('kEmail').value.trim()||!$('pKey').value)return say('pMsg','Fill in all five fields.','bad');
+    if(!$('pConsent').checked)return say('pMsg','Tick the box to confirm that you sign.','bad');
+    btn.disabled=true;say('pMsg','Signing…');
+    post({id:ID,step:'provider',hash:hash,key:$('pKey').value,name:$('pName').value,title:$('pTitle').value,clientName:$('kName').value,clientEmail:$('kEmail').value,consent:true}).then(function(j){
+      done('Signed and sent.','The client has an email with the link to sign. You are copied on it. This is the same link:',j.link);
+    }).catch(function(err){btn.disabled=false;say('pMsg',err.message,'bad');});
+  });
+})();
+</script>
+</body>
+</html>
