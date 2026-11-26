@@ -78,9 +78,12 @@ canvas{display:block;width:100%;height:180px;background:#FFFDF7;border:2px dashe
       <input type="text" id="kName" maxlength="120" required>
       <label for="kEmail">Client email</label>
       <input type="email" id="kEmail" autocomplete="off" maxlength="254" required>
+      <label for="pPad">Draw your signature</label>
+      <div class="pad"><canvas id="pPad" width="1200" height="360" tabindex="0" aria-label="Signature area. Draw with your finger or mouse. If you leave it empty, your typed name is used as your signature."></canvas></div>
+      <p class="padhint"><span>Use your finger or mouse. If you leave this empty, your typed name is your signature.</span><button type="button" class="link" id="pClear">Clear</button></p>
       <label for="pKey">Signing key</label>
       <input type="password" id="pKey" autocomplete="off" required>
-      <label class="check"><input type="checkbox" id="pConsent"><span>I sign this agreement for Social Gear Media LLC, and I agree to sign it electronically. My typed name is my signature.</span></label>
+      <label class="check"><input type="checkbox" id="pConsent"><span>I sign this agreement for Social Gear Media LLC, and I agree to sign it electronically.</span></label>
       <button class="btn" type="submit">Sign and send to client</button>
       <p class="msg" id="pMsg" role="status"></p>
     </form>
@@ -125,21 +128,35 @@ canvas{display:block;width:100%;height:180px;background:#FFFDF7;border:2px dashe
     else $('readPanel').hidden=false;
   }).catch(function(e){$('doc').textContent=e.message;});
 
-  // Signature pad
-  var pad=$('pad'),ctx=pad.getContext('2d'),drawing=false,inked=false,last=null;
-  ctx.lineWidth=5;ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#0D1A59';
-  function at(e){var r=pad.getBoundingClientRect();return {x:(e.clientX-r.left)*pad.width/r.width,y:(e.clientY-r.top)*pad.height/r.height};}
-  pad.addEventListener('pointerdown',function(e){drawing=true;last=at(e);pad.setPointerCapture(e.pointerId);ctx.beginPath();ctx.arc(last.x,last.y,2.5,0,6.3);ctx.fillStyle='#0D1A59';ctx.fill();inked=true;e.preventDefault();});
-  pad.addEventListener('pointermove',function(e){if(!drawing)return;var p=at(e);ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.stroke();last=p;e.preventDefault();});
-  ['pointerup','pointercancel'].forEach(function(n){pad.addEventListener(n,function(){drawing=false;});});
-  $('clear').addEventListener('click',function(){ctx.clearRect(0,0,pad.width,pad.height);inked=false;});
+  // Signature pads. Each pad records its strokes so a signature can also travel as compact data.
+  function makePad(pad,clearBtn){
+    var ctx=pad.getContext('2d'),drawing=false,last=null,strokes=[];
+    ctx.lineWidth=5;ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#0D1A59';ctx.fillStyle='#0D1A59';
+    function at(e){var r=pad.getBoundingClientRect();return {x:(e.clientX-r.left)*pad.width/r.width,y:(e.clientY-r.top)*pad.height/r.height};}
+    pad.addEventListener('pointerdown',function(e){drawing=true;last=at(e);strokes.push([last]);pad.setPointerCapture(e.pointerId);ctx.beginPath();ctx.arc(last.x,last.y,2.5,0,6.3);ctx.fill();e.preventDefault();});
+    pad.addEventListener('pointermove',function(e){if(!drawing)return;var p=at(e);ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.stroke();strokes[strokes.length-1].push(p);last=p;e.preventDefault();});
+    ['pointerup','pointercancel'].forEach(function(n){pad.addEventListener(n,function(){drawing=false;});});
+    clearBtn.addEventListener('click',function(){ctx.clearRect(0,0,pad.width,pad.height);strokes=[];});
+    return {
+      inked:function(){return strokes.length>0;},
+      png:function(){return pad.toDataURL('image/png');},
+      // Packs the strokes as bytes: per stroke a point count, then x,y pairs scaled to 0-255. Thins points until it fits.
+      packed:function(){
+        function thin(min){return strokes.map(function(s){var out=[s[0]];for(var i=1;i<s.length;i++){var q=out[out.length-1];if(i===s.length-1||Math.hypot(s[i].x-q.x,s[i].y-q.y)>=min)out.push(s[i]);}return out;});}
+        var min=4,set=thin(min);while(set.reduce(function(n,s){return n+s.length;},0)>300&&min<200){min*=1.4;set=thin(min);}
+        var bytes=[];set.forEach(function(s){for(var i=0;i<s.length;i+=255){var part=s.slice(i,i+255);bytes.push(part.length);part.forEach(function(p){bytes.push(Math.max(0,Math.min(255,Math.round(p.x/pad.width*255))),Math.max(0,Math.min(255,Math.round(p.y/pad.height*255))));});}});
+        return btoa(String.fromCharCode.apply(null,bytes)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+      }
+    };
+  }
+  var cPad=makePad($('pad'),$('clear')),pPad=makePad($('pPad'),$('pClear'));
 
   $('clientForm').addEventListener('submit',function(e){
     e.preventDefault();var btn=e.target.querySelector('.btn'),name=$('cName').value.trim();
     if(!name)return say('cMsg','Type your full legal name.','bad');
     if(!$('cConsent').checked)return say('cMsg','Tick the box to confirm that you agree.','bad');
     btn.disabled=true;say('cMsg','Signing…');
-    post({id:ID,step:'client',t:token,hash:hash,name:name,consent:true,signature:inked?pad.toDataURL('image/png'):null}).then(function(j){
+    post({id:ID,step:'client',t:token,hash:hash,name:name,consent:true,signature:cPad.inked()?cPad.png():null}).then(function(j){
       done('Signed. Thank you.','You signed on '+j.signedAt+'. The completed agreement is on its way to you and to Social Gear by email, as a PDF.');
     }).catch(function(err){btn.disabled=false;say('cMsg',err.message,'bad');});
   });
@@ -148,7 +165,7 @@ canvas{display:block;width:100%;height:180px;background:#FFFDF7;border:2px dashe
     if(!$('pName').value.trim()||!$('pTitle').value.trim()||!$('kName').value.trim()||!$('kEmail').value.trim()||!$('pKey').value)return say('pMsg','Fill in all five fields.','bad');
     if(!$('pConsent').checked)return say('pMsg','Tick the box to confirm that you sign.','bad');
     btn.disabled=true;say('pMsg','Signing…');
-    post({id:ID,step:'provider',hash:hash,key:$('pKey').value,name:$('pName').value,title:$('pTitle').value,clientName:$('kName').value,clientEmail:$('kEmail').value,consent:true}).then(function(j){
+    post({id:ID,step:'provider',hash:hash,key:$('pKey').value,name:$('pName').value,title:$('pTitle').value,clientName:$('kName').value,clientEmail:$('kEmail').value,consent:true,signature:pPad.inked()?pPad.packed():null}).then(function(j){
       done('Signed and sent.','The client has an email with the link to sign. You are copied on it. This is the same link:',j.link);
     }).catch(function(err){btn.disabled=false;say('pMsg',err.message,'bad');});
   });
