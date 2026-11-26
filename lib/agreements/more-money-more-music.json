@@ -50,10 +50,11 @@
    "t": "ul",
    "items": [
     "**Build fee:** $1,500, one time, due before work starts.",
-    "**Management plan:** $150 per month, billed monthly in advance, starting on the day the Website goes live.",
-    "**Hosting:** the Vercel hosting fee is paid by Social Gear while the management plan is active.",
-    "**Email platform:** Klaviyo fees above its free tier are paid by the Client.",
-    "**Domain:** registration and renewal fees are paid by the Client."
+    "**Management plan:** $150 per month, billed monthly in advance, starting on the day the Website goes live. This fee is for Social Gear's services. It does not include third-party fees.",
+    "**Third-party accounts:** the Client creates, owns and pays for the Vercel hosting account, the Klaviyo account and the domain registration. This keeps ownership and control of all accounts with the Client.",
+    "**Hosting cost:** Vercel has a free plan with enough capacity to run a single landing page, and a paid Pro plan, currently $20 per month. Vercel's terms limit the free plan to personal, non-commercial use, so the Client should plan for the Pro plan. Later phases (sales page, member platform) need more robust hosting on a paid plan.",
+    "**Email platform cost:** Klaviyo is free within its free-plan limits, currently 250 contacts, and is paid above them.",
+    "**Price changes:** third-party prices are set by those providers and can change."
    ]
   },
   {
@@ -106,7 +107,7 @@
   },
   {
    "t": "p",
-   "x": "After cancellation, the Website stays the Client's and stays live, as long as the Client keeps the hosting, domain and other subscriptions active and paid. Social Gear's monitoring, updates, edits and payment of the hosting fee stop on the last day of the notice period."
+   "x": "After cancellation, the Website stays the Client's and stays live, as long as the Client keeps the hosting, domain and other subscriptions active and paid. Social Gear's monitoring, updates and edits stop on the last day of the notice period."
   },
   {
    "t": "h",
