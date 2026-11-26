@@ -1,6 +1,6 @@
 const agreements = require('../lib/agreements');
 const { docHash, makeToken, readToken, sameKey, stamp, buildPdf } = require('../lib/sign-utils');
-const { sendMail, sender } = require('../lib/sign-mail');
+const { sendMail } = require('../lib/sign-mail');
 
 const EMAIL = /^[^\s@<>,;"]+@[^\s@<>,;"]+\.[^\s@<>,;"]+$/;
 const str = (v, max) => typeof v === 'string' && v.trim().length > 0 && v.length <= max;
@@ -35,7 +35,7 @@ module.exports = async function handler(req, res) {
         return res.status(400).json({ error: 'Check your name, your title, and the client name and email.' });
       const token = makeToken({ id: agreement.id, h: hash, pn: src.name.trim(), pt: src.title.trim(), ps: new Date().toISOString(), pip: ip(req), cn: src.clientName.trim(), ce: src.clientEmail.trim() });
       const link = `${site()}/proposals/${agreement.id}/agreement.html?t=${token}`;
-      await sendMail({ to: [src.clientEmail.trim()], cc: [sender()], subject: `Please sign: ${agreement.title} - ${agreement.subtitle}`,
+      await sendMail({ to: [src.clientEmail.trim()], cc: [agreement.provider.email], replyTo: agreement.provider.email, subject: `Please sign: ${agreement.title} - ${agreement.subtitle}`,
         text: `Hi ${src.clientName.trim()},\n\n${src.name.trim()} of ${agreement.provider.company} signed the ${agreement.title} (${agreement.subtitle}).\n\nPlease read it and sign it here:\n${link}\n\nWhen you sign, both of us get the completed copy by email as a PDF. This link works for 30 days.\n\n${src.name.trim()}\n${agreement.provider.company}` });
       return res.status(200).json({ success: true, link });
     }
@@ -55,7 +55,7 @@ module.exports = async function handler(req, res) {
       const provider = { name: t.pn, title: t.pt, email: agreement.provider.email, at: t.ps, ip: t.pip };
       const client = { name: src.name.trim(), title: '', email: t.ce, at: new Date().toISOString(), ip: ip(req), image };
       const pdf = await buildPdf(agreement, provider, client, hash);
-      await sendMail({ to: [t.ce, sender()], subject: `Signed: ${agreement.title} - ${agreement.subtitle}`,
+      await sendMail({ to: [t.ce, agreement.provider.email], replyTo: agreement.provider.email, subject: `Signed: ${agreement.title} - ${agreement.subtitle}`,
         text: `The ${agreement.title} (${agreement.subtitle}) is signed by both parties.\n\n${provider.name}, ${agreement.provider.company}: signed ${stamp(provider.at)}\n${client.name}: signed ${stamp(client.at)}\n\nThe completed copy is attached as a PDF. Keep it for your records.\n\nDocument ID: ${hash}`,
         attachment: { name: `${agreement.id}-signed-agreement.pdf`, bytes: pdf } });
       return res.status(200).json({ success: true, signedAt: stamp(client.at) });
